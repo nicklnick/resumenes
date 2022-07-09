@@ -1,0 +1,1831 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{outlines}
+\usepackage{cancel}
+\usepackage{comment}
+\usepackage{hyperref}
+\newcommand{\lands}{\:\land\:}                          % "logical and with spaces". Pone el "y" dejando espacio(mediano) a los costados
+\newcommand{\comma}{,\,}                                % Pone la coma seguida de un espacio(chiquito)
+\newcommand{\tq}{/\,}                                   % "tal que". Pone la barrita del "tal que" seguida de un espacio
+\newcommand{\vees}{\:\vee\:}                            % "vee with spaces". Pone el "ó" con espacio a los costados
+\newcommand{\eq}{\:=\:}                                 % Pone el igual con espacios(medianos) a los costados
+\newcommand{\neqs}{\:\neq\:}                            % Pone el desigual con espacios(medianos) a los costados
+\newcommand{\relates}{\mathcal{R}}                      % Pone la R para denotar cuando un elemento se realciona con otro
+\newcommand{\enteros}{\mathbb{Z}}                       % Pone la Z de los números enteros
+\newcommand{\naturales}{\mathbb{N}}                     % Pone la N de los números naturales
+\newcommand{\racionales}{\mathbb{Q}}                    % Pone la Q de los números racionales
+\newcommand{\complejos}{\mathbb{C}}                     % Pone la C de los números complejos
+\newcommand{\cuerpo}{\mathbb{K}}                        % Pone la K para denotar un cuerpo (los cuerpos son R,Q o C)
+\newcommand{\reales}{\mathbb{R}}                        % Pone la R de los números reales
+\newcommand{\vabs}[1]{\left\lvert #1 \right\rvert }     % Pone el módulo y recibe como argumento el número
+\newcommand{\Rightarrows}{\: \Rightarrow \:}            % Pone la flecha del "entonces" con espacios(medianos) a los costados
+\newcommand{\Leftrightarrows}{\: \Leftrightarrow \:}    % Pone la flecha del "si y solo si" con espacios(medianos)
+\newcommand{\existsuniq}{\exists !\,}                   % Pone el "existe un único" dejando un espacio(chiquito) para que no quede tan amontonado
+\newcommand{\sumatoria}[2]{\sum_{#1} ^{#2}}             % Pone el epsilon de sumatoria y recibe como argumento #1 el numero de abajo y #2 el de arriba
+\renewcommand*\contentsname{Secciones}
+
+\title{Álgebra}
+\author{Nicolás Margenat}
+\date{2Q 2020}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\pagebreak
+\section{Conjuntos}
+\underline{Definición}: Colección de objetos llamados \emph{elementos} que tienen la propiedad que dado
+un objeto cualquiera se puede decidir si el elemento está o no en el conjunto.
+\begin{itemize}
+    \item \textbf{No} importa el orden de los elementos
+    \item \textbf{No} se tienen en cuenta las repeticiones
+\end{itemize}
+Hay dos \emph{maneras de definir un conjunto}:
+\begin{itemize}
+    \item \textbf{Extensión}:  A=\{a,e,i,o,u\}
+    \item \textbf{Comprensión}: A=\{x\tq x es vocal\}
+\end{itemize}
+
+\subsection{Subconjuntos}
+\underline{Definición}: Sea A un conjunto. Se dice que un conjunto B está contenido ó incluido en A
+si todo elemento de B está incluido en A.
+\begin{equation*}
+    B \subseteq A \Leftrightarrows \forall x\comma x \in B \Rightarrows x \in A
+\end{equation*}
+\begin{equation*}
+    B \nsubseteq A \Leftrightarrows \exists x \tq x \in B \lands  x \notin A
+\end{equation*}
+\textbf{Igualdad de conjuntos}
+\begin{equation*}
+    A = B \Leftrightarrows A \subseteq B \lands B \subseteq A
+\end{equation*}
+\textbf{Conjunto de Partes}
+\begin{equation*}
+    A \; conjunto. \;\mathcal{P}_{(A)}=\{B \; conjunto \tq B \subseteq A \}
+\end{equation*}
+
+\subsection{Operaciones entre conjuntos}
+Para trabajar con conjuntos se toma un conjunto llamado conjunto universal o conjuntos de referencia 
+\begin{enumerate}
+    \item \textbf{Unión}
+    \begin{equation*}
+        A \cup B = \{x \in \mathcal{U}\tq x \in A \vees x \in B\} 
+    \end{equation*}
+    \item \textbf{Intersección}
+    \begin{equation*}
+        A \cap B = \{x \in \mathcal{U}\tq x \in A \lands x \in B \}
+    \end{equation*}
+    \item \textbf{Diferencia/Resta} 
+    \begin{equation*}
+           A - B = \{x \in \mathcal{U}\tq x \in A \lands x \notin B \}
+    \end{equation*}
+    \item \textbf{Complemento}
+    \begin{equation*}
+        \overline{A}=A^c=\{x \in \mathcal{U}\tq x \notin A\}
+    \end{equation*}
+    \item \textbf{Diferencia Simétrica}
+    \begin{equation*}
+        A \bigtriangleup B = (A-B) \cup (B-A) = (A \cup B) - (A \cap B)
+    \end{equation*}
+\end{enumerate}
+\textbf{Propiedades}
+\begin{enumerate}
+    \item \emph{Leyes de De Morgan}
+    \begin{equation*}
+        \overline{A \cup B} \eq \overline{A} \cap \overline{B}
+    \end{equation*}
+    \begin{equation*}
+        \overline{A \cap B} \eq \overline{A} \cup \overline{B}
+    \end{equation*}
+    \item \emph{Leyes Distributivas}
+    \begin{equation*}
+        A \cap B (B \cup C) \eq (A \cap B) \cup (A \cap C)
+    \end{equation*}
+    \begin{equation*}
+        A \cup B (B \cap C) \eq (A \cup B) \cap (A \cup C)
+    \end{equation*}
+    \item \emph{Ley Conmutativa}
+    \begin{equation*}
+        A \cup B \eq B \cup A
+    \end{equation*}
+    \begin{equation*}
+        A \cap B \eq B \cap A
+    \end{equation*}
+    \item \emph{Ley Asociativa}
+    \begin{equation*}
+        (A \cup B) \cup C \eq A \cup (B \cup C)
+    \end{equation*}
+    \begin{equation*}
+        (A \cap B) \cap C \eq A \cap (B \cap C)
+    \end{equation*}
+    \item \emph{Otras}
+    \begin{equation*}
+        A \cup \varnothing \eq A
+    \end{equation*}
+    \begin{equation*}
+        A \cap \varnothing \eq \varnothing
+    \end{equation*}
+    \begin{equation*}
+        A \cup \mathcal{U} \eq \mathcal{U}
+    \end{equation*}
+    \begin{equation*}
+        A \cap \mathcal{U} \eq A
+    \end{equation*}
+    \begin{equation*}
+        \overline{\varnothing} \eq \mathcal{U}
+    \end{equation*}
+    \begin{equation*}
+        \overline{\mathcal{U}} \eq \varnothing
+    \end{equation*}
+\end{enumerate}
+
+\subsection{Producto Cartesiano}
+\underline{Definición}: Sean $A, B \subseteq \mathcal{U}$. Entonces,
+\begin{equation*}
+    A \times B = \{ (a,b)\tq a \in A, b \in B\}
+\end{equation*}
+\textbf{Propiedades}
+\begin{enumerate}
+    \item $A \times \varnothing = \varnothing$
+    \item $\varnothing \times A = \varnothing$
+    \item \textbf{NO} es Asociativa
+    \item \textbf{NO} es Conmutativa 
+\end{enumerate}
+
+\subsection{Familia de Subconjuntos}
+\underline{Definición}: Dado un conjunto A, una \emph{familia de subconjuntos de A} es un subconjunto
+de $\mathcal{P}_{(A)}$. 
+\begin{equation*}
+    \mathcal{F} \subseteq \mathcal{P}_{(A)}
+\end{equation*}
+\subsubsection{Operaciones con Familias}
+    Sea $\mathcal{F} \subseteq \mathcal{P}_{(A)}$, entonces:
+\begin{enumerate}
+    \item \textbf{Unión}
+    \begin{equation*}
+        \cup \mathcal{F} = \cup B = \{x \in A \tq x \in B \text{ para algún } B \in \mathcal{F}\}
+    \end{equation*}
+    \item \textbf{Intersección}
+    \begin{equation*}
+        \cap \mathcal{F} = \cap B = \{x \in A\tq x \in B \text{ para todo } B \in \mathcal{F}\}
+    \end{equation*}
+\end{enumerate}
+
+%-------------------------------------------%
+\section{Relaciones}
+\underline{Definición}: Sean A y B conjuntos no vacíos, una \emph{relación de A en B} es un subconjunto de $A \times B$.
+\\\underline{Notación}: $R \subseteq A \times B \text{ ó } R \in \mathcal{P}_{(A \times B)}$
+\\\\Por otro lado, sea A un conjunto. Se dice que \emph{R es una relación en A} si $R \subseteq A \times A$("R en A").
+\subsection{Dominio e Imagen}
+Sea $R \subseteq A \times B$:
+\begin{equation*}
+    Dom(R):\{x \in A \tq \exists y \in B \text{ tal que } x\mathcal{R}y\}
+\end{equation*}
+\begin{equation*}
+    Im(R):\{y \in B \tq \exists x \in A \text{ tal que } x\mathcal{R}y\}
+\end{equation*}
+
+\subsection{Relación Inversa}
+\underline{Definición}: Dada R en $A \times B$, se define $R^{-1} \subseteq B \times A$ tal que:
+\begin{equation*}
+    R^{-1} \eq \{ (x,y) \tq (y,x) \in R \}
+\end{equation*}
+Además:
+\begin{equation*}
+    Dom(R) \eq Im(R^{-1})
+\end{equation*}
+\begin{equation*}
+    Im(R) \eq Dom(R^{-1})
+\end{equation*}
+
+\subsection{Propiedades de una relación de un conjunto en sí mismo}
+\begin{itemize}
+    \item \textbf{Reflexividad}
+    \\R es reflexiva si:
+    \begin{equation*}
+        a\mathcal{R}a \; \forall a \in A
+    \end{equation*}
+    \\R no es reflexiva si: 
+    \begin{equation*}
+    \exists a \in A \tq a \cancel{\mathcal{R}} a
+    \end{equation*}
+    \item \textbf{Simetría}
+    \\R es simétrica si:
+    \begin{equation*}
+        a\mathcal{R}b \Rightarrows b\mathcal{R}a \; \forall a,b \in A
+    \end{equation*}
+    \\R no es simétrica si:
+    \begin{equation*}
+        \exists a,b \in A \tq a\relates b \lands b\cancel{\mathcal{R}}a
+    \end{equation*}
+    \item \textbf{Antisimetría}
+    \\R es antisimétrica si(cualquiera de las dos sucede, pues son expresiones equivalentes):
+    \begin{equation*}
+        a \relates b \lands b \relates a \Rightarrows a \eq b
+    \end{equation*}
+    \begin{equation*}
+        a \relates b \lands a \neqs b \Rightarrows b \cancel{\relates} a 
+    \end{equation*}
+    \\R no es antisimétrica si:
+    \begin{equation*}
+        \exists a,b \in A \tq a \neqs b \lands a \relates b \lands b \relates a
+    \end{equation*}
+    \item \textbf{Transitividad}
+    \\R es transitiva si: 
+    \begin{equation*}
+        a \relates b \lands b \relates c \Rightarrows a \relates c \; \forall a,b,c \in A
+    \end{equation*}
+    \\R no es transitiva si:
+    \begin{equation*}
+        \exists a,b,c \in A \tq a \relates b \lands b \relates c \lands a \cancel{\relates} c
+    \end{equation*}
+\end{itemize}
+De esta manera, podemos decir que:
+\begin{itemize}
+    \item R es de \textbf{equivalencia} si es: reflexiva, simétrica y transitiva.
+    \item R es de \textbf{orden} si es: reflexiva, antisimétrica y transitiva.
+    \item R es de \textbf{orden total} si es: de orden y $\forall a,b \in A: a \relates b \vees b \relates a$
+\end{itemize}
+
+\subsection{Relaciones de equivalencia}
+\subsubsection{Propiedades de las relaciones de equivalencia}
+R en A, R es de equivalencia. Entonces:
+\begin{center}
+ $A_1 \cup A_2 \cup ... \cup A_n \eq A$
+\\ $A_i \lands A_j \eq \varnothing$ si $i \neqs j$
+\end{center}
+\subsection*{Clases de equivalencia}
+R en A. R de equivalencia. $a \in A$. Entonces, definimos la \emph{clase de a} como:
+\begin{equation*}
+    [a] \eq \overline{a} \eq \{b \in A \tq b \relates a \}
+\end{equation*}
+El \emph{conjunto cociente} es el conjunto de clases de R, y se nota:
+\begin{equation*}
+    A/\relates \eq \{ \overline{a} \}
+\end{equation*}
+\subsubsection*{Particiones}
+A conjunto. A $\neqs \varnothing$. $\mathcal{F} \subseteq \mathcal{P}_{(A)}$.
+\\ $\mathcal{F}$ es una \emph{partición} de A si:
+\begin{enumerate}
+    \item $B \neqs \varnothing \comma  \forall B \in \mathcal{F}$
+    \item $B_1, B_2 \in \mathcal{F}\comma B_1 \neqs B_2 \Rightarrows B_1 \lands B_2 \eq \varnothing$
+    \item $\cup \mathcal{F} \eq \cup B \eq A$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 2.A}
+\\ R en A, R de equivalencia.
+\\ R induce una partición en A.
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 2.B}
+\\ Dado un conjunto A $\neqs \varnothing$. Sea $\mathcal{F}$ una partición de A.
+Entonces $\mathcal{F}$ induce una relación de equivalencia R en A.
+}}
+
+%-------------------------------------------%
+\section{Funciones}
+\underline{Definición}: Sea $R \subseteq A \times B$ una relación. Decimos que R es una función si:
+\begin{enumerate}
+    \item $\forall a \in A \comma \exists b \in B \tq (a,b) \in R$
+    \item $(a,b) \in R \lands (a,c) \in R \Rightarrows b \eq c$
+\end{enumerate}
+otra manera de decirlo es: R es función si,
+\begin{equation*}
+    \forall a \in A \comma \exists !\, b \in B \tq (a,b) \in R
+\end{equation*}
+\underline{Notación}: $f: A \rightarrow B \tq f_{(a)}=b \text{   si } (a,b) \in R$. Donde,
+\\ A = $Dom(f)$
+\\ B = $Codom(f)$
+\\ $Im(f) = \{y \in B \tq \exists x \in A \text{ tal que } f(x)=y\}$
+\\ Preimagen = $f^{-1}(y)$ = $\{x \in A \tq f(x)=y\} $
+
+\subsection{Inyectividad, Sobreyectividad y Biyectividad}
+\begin{itemize}
+    \item \textbf{Inyectiva}
+    \\Decimos que \emph{f es inyectiva} si:
+    \begin{equation*}
+        f(a) \eq f(b) \Rightarrows a \eq b
+    \end{equation*}
+    o lo que es lo mismo:
+    \begin{equation*}
+        a \neqs b \Rightarrows f(a) \neqs f(b)
+    \end{equation*}
+    \item \textbf{Sobreyectiva}
+    \\Decimos que \emph{f  es sobreyectiva} si:
+    \begin{equation*}
+        \forall b \in B \comma \exists a \in A \tq f(a)=b
+    \end{equation*}
+    o lo que es lo mismo: $Im(f)=B$
+    \item \textbf{Biyectiva}
+    \\Decimos que \emph{f es biyectiva} si:
+    \begin{equation*}
+       f \text{ es inyectiva} \lands f \text{ es sobreyectiva}
+    \end{equation*}
+\end{itemize}
+\subsection*{Función Inversible}
+\underline{Definición}: Sea $f: A \rightarrow B$. Decimos que \emph{f es inversible} si: 
+\begin{equation*}
+\exists g: A \rightarrow B \tq g\circ f = id_A \lands f\circ g = id_B
+\end{equation*}
+\underline{Notación}: $g \eq f^{-1}$ (\emph{g es la inversa de f})
+\pagebreak
+
+%-------------------------------------------%
+\section{Combinatoria}
+\underline{Definición}: Dado un conjunto A finito, el \emph{cardinal de A} es la cantidad de \linebreak elementos de A.
+\\ \underline{Notación}: $\#A \eq |A|$
+
+\subsection{Principios de conteo}
+\subsubsection*{Primer principio de conteo}
+"Si una tarea puede efectuarse en k etapas, y la etapa j se puede desarrollar de $n_j$ formas distintas, entonces 
+la tarea se puede desarrollar de $n_1 * n_2 * ... * n_k \eq n^k$ formas distintas."
+\subsubsection*{Segundo principio de conteo}
+"Cuando hay casos que son disjuntos, se \emph{suman} las posibilidades de cada caso"
+\begin{equation*}
+    A \eq \cup^k _{j=1} A_j \eq A_1 \cup A_2 \cup ... \cup A_k
+\end{equation*}
+\begin{equation*}
+    A_i \cap A_j \eq \varnothing \text{ si } i \neqs j
+\end{equation*}
+\begin{equation*}
+    \# A \eq \sum^k _{j=1} \# A_j \eq \# A_1 + \# A_2 + ... + \# A_k
+\end{equation*}
+
+\subsection{Variación vs. Combinación}
+\subsubsection*{Variación}
+\underline{Definición}: Una variación de k elementos de X es una \emph{cadena ordenada} de k elementos de X.
+\begin{equation*}
+    V_{(n,k)} \eq \frac{n!}{(n-k)!} \eq \binom{n}{k}k
+\end{equation*}
+De esta forma podemos deducir que la \emph{cantidad de formas de ordenar n elementos} es:
+\begin{equation*}
+    V_{(n,n)} \eq \frac{n!}{(n-n)!} \eq \frac{n!}{0!} \eq n!
+\end{equation*}
+Una manera practica de verlo es: \emph{"Agarro k elementos de un conjunto con n elementos y me importa el orden en que los agarro"}
+\subsubsection*{Combinación}
+\underline{Definición}: Una combinación de k elementos de X es un subconjunto de k elementos de X.
+\begin{equation*}
+    C_{(n,k)} \eq \frac{n!}{k!(n-k)!} \eq \binom{n}{k} 
+\end{equation*}
+Una manera práctica de verlo es: \emph{"Agarro k elementos de un conjunto de n elementos sin importar el orden en que los agarro"}
+\pagebreak[1]\\\textbf{Propiedades de los números combinatorios}
+\begin{enumerate}
+    \item \begin{equation*}
+        \binom{n + 1}{k} \eq \binom{n}{k - 1} + \binom{n}{k} \;1 \leq k \leq n
+    \end{equation*}
+    \item \begin{equation*}
+        \binom{n}{k} \eq \binom{n}{n - k}
+    \end{equation*}
+    \item \begin{equation*}
+        \sum^n _{k=0} \binom{n}{k} \eq \binom{n}{0} + \binom{n}{1} + ... + \binom{n}{n} \eq 2^n
+    \end{equation*}
+\end{enumerate}
+Además, $\#\mathcal{P}_{(X)} \eq 2^{\#X}$
+\subsubsection*{Orden con repetición}
+Sirve para resolver ejercicios del tipo: \emph{"¿Cuántas palabras de n letras puedo formar si hay j letras que se repiten?"}
+\begin{equation*}
+    \frac{n!}{n_1!n_2!...n_j!} 
+\end{equation*}
+    donde $n_1, n_2... n_j$ es la cantidad de veces que se repite cada letra.
+\subsubsection*{Distribución de bolitas indistinguibles en cajas distintas}
+Sirve para reolver ejercicios del tipo: \emph{"Tengo n bolitas en k cajas indistinguibles. ¿De cuántas formas se pueden distribuir?"}
+\begin{equation*}
+    \binom{n+k-1}{n} \eq \binom{n+k-1}{k-1}
+\end{equation*}
+\pagebreak
+
+%-------------------------------------------%
+\section{Enteros}
+\subsection{Definiciones previas}
+\underline{Estructura algebraica}: Es una n-tupla formada por:
+\begin{equation*}
+    (\underbrace{ A_1,...,A_k}_{\text{Conjuntos $\neq \varnothing$}};\underbrace{op_1,...,op_t}_{\substack{\text{Operaciones definidas sobre los} \\ \text{conjuntos anteriores}}}) \;\; k+t=n
+\end{equation*}
+\underline{Grupo}: Es una estructura algebraica
+\begin{equation*}
+    (G , \otimes)
+\end{equation*}
+\begin{equation*}
+    \otimes : G \times G \rightarrow G
+\end{equation*}
+que cumple las siguientes propiedades:
+\begin{itemize}
+    \item \textbf{Asociativa}
+    \begin{equation*}
+        a \otimes (b \otimes c) \eq (a \otimes b) \otimes c
+    \end{equation*}
+    \item \textbf{Existencia de Elemento Neutro}
+    \begin{equation*}
+        \exists e \in G \tq a \otimes e = a \comma e \otimes a = a
+    \end{equation*}
+    \item \textbf{Inverso}
+    \begin{equation*}
+        \forall a \in G, \exists \overline{a} \in G \tq a \otimes \overline{a} = e \lands \overline{a} \otimes a = e
+    \end{equation*}
+    \item \textbf{Conmutativo}
+    \begin{equation*}
+        a \otimes b = b \otimes a
+    \end{equation*}
+\end{itemize}
+\underline{Anillo Conmutativo}: $(A, +, \otimes)$ es un anillo conmutativo si:
+\begin{enumerate}
+    \item $(A, +)$ es un grupo conmutativo.
+    \item $\otimes$ es: asociativo, conmutativo, distributivo y tiene elemento neutro.
+\end{enumerate}
+\underline{Cuerpo}: $(K, +, \otimes)$ es un cuerpo si: 
+\begin{enumerate}
+    \item $(K, +, \otimes)$ es un anillo conmutativo.
+    \item $\forall a \in K, a \neq 0, \exists a^{-1} \tq a \otimes a^{-1} = 1$ (existe inverso)
+\end{enumerate}
+\underline{Unidades de un anillo}: A es un anillo, $a \in A$ es una unidad de un anillo si:
+\begin{equation*}
+    \exists b \in A \tq a \otimes b = 1 \lands b \otimes a = 1
+\end{equation*}
+y se nota: $\mathcal{U}_{(A)}$ ("conjunto de unidades de A")
+
+\subsection{Divisibilidad en un anillo}
+\underline{Definición}: A es un anillo, $a, b \in A\comma b \neq 0$. Decimos que "a es divisible por b", "a es múltiplo de b", "b es divisor de a" si:
+\begin{equation*}
+    \exists c \in A \tq a \eq bc
+\end{equation*}
+\underline{Notación}: $b | a$
+\\
+\\ $Div(a) \eq \{ b \in A \tq b|a \}$ ("conjunto de divisores de a")
+\subsubsection*{Propiedades}
+Sean $a, b, c \in \mathbb{Z}$ 
+\begin{enumerate}
+    \item $a \leq b \Rightarrows a + c \leq b + c$
+    \item $a \leq b \lands c \gneq 0 \Rightarrows ac \leq bc$ 
+    \item $ab \eq ac \lands a \neqs 0 \Rightarrows  b \eq c$
+    \item $ab \eq 0 \Rightarrows a = 0 \vees b = 0$
+    \item $a|b \Leftrightarrows |a|\,|\,|b|$
+    \item $a|b \lands b \neq 0 \Rightarrows |a| \leq |b|$
+    \item $a|b \lands b|a \Rightarrows |a| \eq |b|$
+    \item $a|b \lands a|c \Rightarrows a | b \pm c$ 
+    \item $a|b \lands a|b \pm c \Rightarrows a|c$
+    \item $a|b \Rightarrows a|bc$
+    \item $a|b \Rightarrows a^n | b^n$ con $n \in \mathbb{N}$
+    \item $a|b \lands a|c \Rightarrows a|\alpha b+\beta c$ con $\alpha, \beta \in \mathbb{Z}$
+\end{enumerate}
+\subsubsection{Algoritmo de división}
+\underline{Definición}: Sea $a \in \mathbb{Z}\comma d \in \mathbb{Z}-\{0\}$. Entonces,
+\begin{equation*}
+   \exists !\: q, r \in \mathbb{Z} \tq a \eq d*q+r 
+\end{equation*}
+Donde $q = \underbrace{q_d(a)}_{\text{cociente de dividir a por d}}$ y $r = \underbrace{r_d(a)}_{\text{resto de dividir a por d}} 0 \leq r \lneq |d|$
+\\De esta manera podemos deducir que:
+\begin{enumerate}
+    \item $d|a \Leftrightarrows r_d(a)=0$
+    \item $0 \leq a \lneq |d| \Rightarrows r_d(a)=a$
+\end{enumerate}
+
+\subsection{Congruencias}
+\underline{Definición}: Decimos que $\underbrace{a \equiv b (mod \: m)}_{\text{"a es congruente a b módulo m"}}$ si $m|a-b$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.A}
+\\ R en $\mathbb{Z}$ tal que $aRb$ si $a \equiv b (m)$.
+\\ R es de equivalencia. 
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.B}
+\\ Sea $d \in \mathbb{N}$. Entonces:
+\begin{enumerate}
+    \item $a \equiv r_d(a) (mod \: d)$
+    \item $a \equiv b (mod \: d) \Leftrightarrows r_d(a) = r_d(b)$
+\end{enumerate}
+}}
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item $a_1 \equiv b_1 (m) \lands a_2 \equiv b_2 (m) \Rightarrows a_1 \pm a_2 \equiv b_1 \pm b_2 (m)$
+    \\ $a_1 \equiv b_1 (m) \lands a_2 \equiv b_2 (m) \Rightarrows a_1 * a_2 \equiv b_1 * b_2 (m)$
+    \item $a_1 \equiv b_1 (m) \lands ... \lands a_k \equiv b_k (m) \Rightarrows a_1 \pm ... \pm a_k \equiv b_1 \pm ... \pm b_k (m)$
+    \\ $a_1 \equiv b_1 (m) \lands ... \lands a_k \equiv b_k (m) \Rightarrows a_1 * ... * a_k \equiv b_1 * ... * b_k (m)$
+    \item $a \equiv b (m) \Rightarrows a^n \equiv b^n (m) \; \forall n \in \mathbb{N}$
+    \item $a \equiv b (m) \Rightarrows ac \equiv bc (m)$
+\end{enumerate}
+
+\subsection{Maximo común divisor (MCD)}
+\underline{Definición}: Sean $a, b \in \mathbb{Z}$ no ambos nulos, entonces $d \in \mathbb{Z}$ es el MCD de a y b si:
+\begin{enumerate}
+    \item $d \gneq 0$
+    \item $d|a \lands d|b$
+    \item $c|a \lands c|b \Rightarrows c|d$
+\end{enumerate}
+\underline{Notación}: $d \eq MCD(a,b) \eq (a : b)$
+\textbf{Propiedad}: $a, b \in \enteros$, no ambos nulos, $c \in \enteros - \{0\}$. Entonces,
+\begin{equation*}
+    (ca:cb)\eq \vabs{c}(a:b)
+\end{equation*}
+\subsubsection{Combinación Entera}
+\underline{Definición}: Una combinacion entera de a y b es un número de la forma $ra + sb$, con $r \comma s \in \mathbb{Z}$
+\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.C}
+\\Sean $a, b \in \mathbb{Z}$, no ambos nulos. Entonces:
+\begin{equation*}
+   \existsuniq d \in \enteros \tq d \eq (a:b) 
+\end{equation*}
+y además es la menor combinación entera positiva de a y b.
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Lema}
+\\Sean $a, b \in \enteros$, no ambos nulos. Entonces:
+\begin{equation*}
+    (a:b) \eq (b:a-kb) \; \forall k \in \enteros
+\end{equation*}
+En particular, si $b \neq 0$
+\begin{equation*}
+    k \eq q_ba \Rightarrows (a:b)\eq (b:r_ba)
+\end{equation*}
+}}
+
+\subsection{Números Coprimos}
+\underline{Definición}: Se dice que a y b son coprimos si $(a:b) = 1$.
+\\\underline{Notación}: $a \bot b$ 
+\subsection*{Propiedades}
+\begin{enumerate}
+    \item $a \bot b \lands a | bc \Rightarrows a |c$
+    \item $a \bot b \lands a \bot c \Rightarrows a \bot bc$
+    \item $a|c \lands b|c \lands a \bot c \Rightarrows ab|c$
+    \item $d = (a:b) \Rightarrows \frac{a}{d} \bot \frac{b}{d}$
+    \item $a \bot b \Rightarrows a^n \bot b^k$ con $n, k \in \naturales$
+    \item $a \bot c \Rightarrows (a:cb) \eq (a:b)$
+\end{enumerate}
+\subsubsection{Primos vs. Compuestos}
+\underline{Primo}: Un número $p \in \enteros$ si tiene exactamente 4 divisores.
+\\Es decir, $div(p) = \{ \pm \,1 ; \pm \,p\}$ siendo $\vabs{p} \geq 1$
+\\ \underline{Compuesto}: Un número $a \in \enteros$ es compuesto si \emph{no es primo} y $a \notin \{1,-1\}$
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item a es compuesto $\Rightarrows \exists a_1\comma a_2 \tq a = a_1 * a_2 \lands 2 \leq \vabs{a_i} \leq \vabs{a} -1$
+    \item $(a:p) \eq 1 \;$ si $p \cancel{|} a$
+    \\$(a:p) \eq p \;$ si $p |a$ 
+\end{enumerate}
+
+\subsection{Números Primos}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.D}
+\\p primo y $p|ab \Rightarrows p|a \vees p|b$
+\\\underline{Generalización}:
+\begin{equation*}
+    p \: primo \lands p |a_1*a_2*...*a_k \Rightarrows \exists i \tq p|a_i \text{ con } 1 \leq i \leq k
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.E}
+\\Existen infinitos números primos
+}}
+\subsubsection{$V_p$}
+Sea p primo. Entonces:
+\begin{equation*}
+    V_p: \enteros - \{0\} \rightarrow \naturales_0 \tq V_p(a) \text{ es} 
+    \begin{cases}
+        0 &\text{si } p \cancel{|} a \\
+        k &\text{si }  p^k|a \lands p^{k+1} \cancel{|} a
+    \end{cases}
+\end{equation*}
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item $V_p(a*b) \eq V_p(a) + V_p(b)$
+    \item $V_p(a^n) \eq nV_p(a)$
+    \item $d|a \Rightarrows V_p(d) \leq V_p(a)$
+    \item $V_p \geq 0$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema Fundamental de la Aritmética (TFA)}
+\\ Sea $a \in \enteros - \{ -1, 0, 1 \} \Rightarrows a=sg(a) p_1*p_2*...*p_k$ siendo $p_j$ primo y $1 \leq j \leq k$
+\\ Además, la \emph{factorización es única} en estos casos.
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario TFA}
+\\ Si $a \in \enteros -\{-1,0,1\} \Rightarrows \exists p \; primo \comma p \gneq 0 \tq p|a$
+}}
+
+\subsection{Mínimo Común Múltiplo (MCM)}
+\underline{Definición}: Sean $a,b \in \enteros$ no ambos nulos, el MCM entre a y b es un número $m \in \enteros /$
+\begin{itemize}
+    \item $m \gneq 0$
+    \item $a|m \lands b|m$
+    \item $a|c \lands b|c \Rightarrows m|c$
+\end{itemize} 
+\underline{Notación}: $m = [a:b]$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.F}
+\\ Sean $a,b \in \enteros \comma a \neq 0 \comma b \neq 0 \Rightarrows \vabs{a*b} \eq (a:b)[a:b]$
+}}
+
+\subsection{Ecuaciones diofánticas}
+\underline{Definición}: Una ecuación diofántica es una ecuación que se puede escribir de la siguiente forma:
+\begin{equation*}
+    ax+by \eq c \; \text{ con }a,b \in \enteros \comma a\neq 0 \comma b \neq 0
+\end{equation*}
+\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.G}
+\\ Sean ax+by=c con $a,b \in \enteros \comma a \neq 0 \comma b \neq 0$. Entonces:
+\begin{enumerate}
+    \item La ecuacion tiene solución en $\enteros \Leftrightarrows d|c$
+    \item Si $(x_0, y_0) \in \enteros^2$ es una solución de la ecuación \\$\Rightarrows$ Sol=$\{(x,y) \in \enteros \tq (x,y)=\underbrace{(x_0,y_0)}_\text{Sol. particular}+\underbrace{k(\frac{b}{d},-\frac{a}{d})}_\text{Sol. homogénea}$ con $k \in \enteros\}$
+\end{enumerate}
+}}
+
+\subsection{Ecuaciones de congruencia lineal}
+\underline{Definición}: Una ecuación de congruencia lineal es una ecuación de la forma:
+\begin{equation*}
+    ax \equiv c (b) \text{ con } a \comma c \in \enteros \comma a \neq 0 \comma b \in \naturales
+\end{equation*}
+\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 5.H}
+\\ Sea $ax \equiv c (b) \text{ con } a \comma c \in \enteros \comma a \neq 0 \comma b \in \naturales$. Entonces:
+\begin{enumerate}
+    \item La ecuacion tiene solución $\Leftrightarrows (a:b)|c$
+    \item Si $x_0$ es una solución de la ecuación \\$\Rightarrows$ Sol=$\{x \in \enteros \tq x \equiv x_0 (\frac{b}{(a:b)})\}$
+\end{enumerate}
+}}
+\subsubsection*{Inverso multiplicativo modular}
+\underline{Definición}: $a^* \in \enteros$ es el \emph{inverso multiplicativo de $a \in \enteros$ módulo m} \\si $a.a^* \equiv 1 (m)$.
+\\Notemos que si m es primo, entonces:
+\\Si $a \,\cancel{\equiv}\, 0 (m) \Rightarrows$ a tiene inverso multiplicativo
+\pagebreak[2]\\\underline{\textbf{Propiedad cancelativa}}
+\begin{equation*}
+    a \bot m \lands a.c' \equiv a.c' (m) \Leftrightarrows c \equiv c' (m)
+\end{equation*}
+\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema de Fermat}
+\\ Sea p primo. Entonces:
+\begin{enumerate}
+    \item $a^p \equiv a (p)$
+    \item $a^{p-1} \equiv 1 (p)$ si $p \cancel{|} a$
+\end{enumerate}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\makebox[\textwidth]{\underline{Teorema Chino del Resto (TChR)}}
+\begin{equation*}
+    \begin{cases}
+        x \equiv& a_1(m_1) \\
+        x \equiv& a_2(m_2) \\
+        \vdots & \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; m_i \bot m_j \text{ si } i \neq j \\
+        x \equiv& a_k(m_k)
+    \end{cases}
+\end{equation*}
+Entonces, 
+\begin{equation*}
+    \existsuniq x_0 \tq 0 \leq x_0 \leq \prod_{j=1} ^k m_j \text{ tal que $x_0$ es sol. del sistema}
+\end{equation*}
+}}
+\pagebreak
+
+%-------------------------------------------%
+\section{Polinomios}
+\underline{Definición}: Dado un cuerpo $\cuerpo (\racionales \comma \reales \comma \complejos)$, f es un polinomio con coeficientes en $\cuerpo$ si se puede escribir como:
+\begin{equation*}
+    f \eq a_nx^n + a_{n-1}x^{n-1}+...+a_1x^1+a_0 \eq \sum_{k=0}^n a_kx^k
+\end{equation*}
+\underline{Notación}: $\cuerpo_{[x]}$ es el conjunto de polinomios con coeficientes en $\cuerpo$.
+\subsubsection*{Definiciones importantes}
+\underline{Igualdad de polinomios}: Dados $f \eq \sum_{j=0}^n a_jx^j$ y $g \eq \sum_{j=0}^m b_jx^j$ en $\cuerpo_{[x]}$ decimos que:
+\begin{equation*}
+    f \eq g \Leftrightarrows n = m \lands a_j = b_j \text{ con } 0 \leq j \leq n
+\end{equation*}
+\underline{Polinomio nulo}: f es el polinomio nulo si $f=0$.
+\\ Si f \emph{no} es el polinomio nulo, entonces:
+\begin{equation*}
+    \exists N \in \naturales_0 \tq f \eq \sum_{j=0}^N a_jx^j \lands a_N \neq 0
+\end{equation*}
+
+\subsection{Operaciones en $\cuerpo_{[x]}$}
+Sean $f \eq \sum_{j=0}^n a_jx^j$ y $g \eq \sum_{j=0}^n b_jx^j$.
+\\Entonces:
+\begin{enumerate}
+    \item $f + g = \sum_{j=0}^n (a_j + b_j)x^j$
+    \item $f * g = \sum_{j=0}^{2n} c_jx^j \comma c_j = \sum_{i+k} a_ib_k$
+\end{enumerate}
+Unas observaciones. Sea $\cuerpo$ cuerpo, $f,g \in \cuerpo_{[x]}$ no nulos. Entonces:
+\begin{enumerate}
+    \item Si $f+g \neq 0 \Rightarrows gr(f+g) \leq max\{gr(f)\comma gr(g)\}$
+    \item Si $f * g \neq 0 \Rightarrows gr(f+g) \eq gr(f) + gr(g)$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 6.A}
+\\$(\cuerpo_{[x]} \comma + \comma *)$ es un anillo conmutativo, siendo $\cuerpo$ cuerpo.
+\\ Además, si $f * g =0  \Rightarrows f=0 \vees g=0$
+}}
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario T6.A}
+\\ $\cuerpo$ cuerpo, $f \in \cuerpo_{[x]}$. Entonces:
+\begin{equation*}
+    f \text{ tiene inverso multiplicativo} \Leftrightarrows f \neq 0 \lands gr(f)=0
+\end{equation*}
+}}
+
+\subsection{Divisibilidad}
+\underline{Definición}: Sean $f,g \in \cuerpo_{[x]}, \cuerpo \text{ cuerpo }, g \neq 0$. Se dice que si \emph{g divide a f}, entonces:
+\begin{equation*}
+   \exists q \in \cuerpo_{[x]} \tq f = g * q 
+\end{equation*}
+\underline{Notación}: $g | f$
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item $g\neq 0 \comma g|0$
+    \item $g | f \Leftrightarrows cg | f$ con $c \in \cuerpo - \{0\} = \cuerpo^*$
+    \item $g|f \Leftrightarrows \frac{g}{cp(g)} | \frac{f}{cp(f)}$ con $f\neq 0$
+    \item $g|f \Leftrightarrows g|cf$ con $c \in \cuerpo^*$
+    \item $f \comma g$ no nulos, $g|f \lands gr(g) \eq gr(f) \Rightarrows \exists c \in \cuerpo^* \tq f=cg$
+    \item $f|g \lands g|f \Rightarrows f \eq cg$ con $c \in \cuerpo^*$
+    \item $f \notin \cuerpo \comma c|f \lands cf|f$ si $c \in \cuerpo^*$. Es decir, f tiene como divisores cualquier constante y múltiplos de él mismo.
+\end{enumerate}
+\subsubsection*{Polinomios reducibles e irreducibles}
+\underline{Irreducible}: Decimos que $f \in \cuerpo_{[x]}$ es irreducible en $\cuerpo_{[x]}$ cuando $f \notin \cuerpo$ y los únicos divisores son $g=c$ ó $g=cf$ con $c \in \cuerpo^*$, y los \emph{divisores mónicos} de f son 1 y $\frac{f}{cp(f)}$.
+\\\\\underline{Reducible}: Decimos que $f \in \cuerpo_{[x]}$ es reducible en $\cuerpo_{[x]}$ cuando $f \notin \cuerpo$ y 
+\begin{equation*}
+    \exists g \in \cuerpo_{[x]} \tq g|f \lands g \neq c \lands g\neq cf \text{ siendo } c \in \cuerpo^*.
+\end{equation*}
+Es decir, $f$ tiene un divisor $g \tq 0 \lneq gr(g) \lneq gr(f)$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 6.B}
+\\Dado $f \comma g \in \cuerpo_{[x]}$ no nulos, entonces:
+\begin{equation*}
+   \existsuniq q \comma r \in \cuerpo_{[x]} \tq f \eq g*q+r \text{ con } r=0 \vees gr(r) \lneq gr(g)
+\end{equation*}
+siendo q el cociente y r el resto de dividir f por g.
+}}
+
+\subsection{Máximo común divisor}
+\underline{Definición}: Sean $f,g \in \cuerpo_{[x]}$ no ambos nulos. El Máximo Común Divisor entre f y g es el \emph{polinomio mónico de mayor grado que divide tanto a f como a g}, y es \emph{único}.
+\\\underline{Notación}: $(f:g)$
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item $(f:0) \eq \frac{f}{cp(f)} \: \forall f \in \cuerpo_{[x]}$
+    \item $(f:g) \eq (g:r_g(f)) \: \forall g \in \cuerpo_{[x]}$, $g$ no nulo.
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario MCD polinomios}
+\\ Sean $f,g \in \cuerpo_{[x]} \comma g\neq 0$. Entonces,
+\begin{enumerate}
+    \item $c \in \cuerpo^* \comma (c:f)=1$
+    \item $g|f \Rightarrows (f:g)= \frac{g}{cp(g)}$
+\end{enumerate}
+}}
+
+\subsection{Algoritmo de Euclides}
+\underline{Definción}: $f,g \in \cuerpo_{[x]}$. Entonces $(f:g)$ es el último resto no nulo divididdo su coeficiente principal que aparece en las siguientes divisiones:
+\begin{equation*}
+    (f:g)=(g:r_1)=(r_1:r_2)=...=(r_{k-1}:r_k)=(r_k:0)=\frac{r_k}{cp(r_k)}
+\end{equation*}
+Además, existen $s,t \in \cuerpo_{[x]} \tq (f:g)=s.f+t.g$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario Algoritmo de Euclides}
+\\ Sean $f,g \in \cuerpo_{[x]}$ no nulos. Entonces,
+    $h = (f:g) \in \cuerpo_{[x]}$ es el único polinomio no nulo tal que:
+    \begin{enumerate}
+        \item $h$ mónico
+        \item $h|f \lands h|g$
+        \item $q|f \lands q|g \Rightarrows q|h$
+    \end{enumerate}
+}}
+
+\subsection{Polinomios Coprimos}
+\underline{Definición}: Sean $f,g \in \cuerpo_{[x]}$ no ambos nulos. Se dice que $(f:g)=1$ ó $f \bot g \Leftrightarrows \exists s,t \in \cuerpo_{[x]} \tq sf+tg=1$.
+\subsubsection*{Propiedades}
+Sean $f,g \in \cuerpo_{[x]}$. Entonces,
+\begin{enumerate}
+    \item $g \bot h \comma g|f \lands h|f \Leftrightarrows gh|f$
+    \item $g \bot h \comma g|hf \Leftrightarrows g|f$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones}
+\\ Sea $f$ irreducible en $\cuerpo_{[x]}$. Entonces,
+\begin{enumerate}
+    \item $\forall g \in \cuerpo_{[x]} \comma (f:g)$ %TERMINAR HOJA 4.3
+    \item $\forall g,h \in \cuerpo_{[x]} \comma f|gh \Rightarrows f|g \vees f|h$
+\end{enumerate}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema Fundamental de la Aritmética para polinomios}
+\\ Sea $\cuerpo$ cuerpo, $f \in \cuerpo_{[x]}$ un polinomio no constante, entonces \emph{existen únicos polinomio mónicos distintos} $g_1, g_2,...,g_r$ en $\cuerpo_{[x]}$ tales que:
+\begin{equation*}
+    f=c*g_1^{m_1}*g_2^{m_2}*...*g_r^{m_r} \text{ donde } c \in \cuerpo^*
+\end{equation*}
+(c es el coeficiente principal de f).
+Además, la unicidad de los factores es cierta salvo el orden.
+}}
+
+\subsection{Evaluación}
+\underline{Definición}: Dado $f=a_nx^n+...+a_1x^1+a_0 \in \cuerpo_{[x]}$ se define de forma natural una función:
+\begin{equation*}
+    f: \cuerpo \rightarrow \cuerpo \tq f(x)=a_nx^n+...+a_1x^1+a_0
+\end{equation*}
+y denominamos a esta función f como \emph{función evaluación}.
+\subsubsection*{Propiedades}
+Sean $f,g \in \cuerpo_{[x]}$. Entonces,
+\begin{enumerate}
+    \item $(f+g)_{(x)} = f_{(x)}+g_{(x)}$
+    \item $(f*g)_{(x)} = f_{(x)} * g_{(x)}$
+\end{enumerate}
+
+\subsection{Raíz}
+\underline{Definición}: Dado $f \in \cuerpo_{[x]} \comma a \in \cuerpo$. Decimos que \emph{a es raíz de f} si:
+\begin{equation*}
+   f(a)=0 \Leftrightarrows x-a|f \Leftrightarrows f=(x-a)q \text{ para algún } q \in \cuerpo_{[x]}
+\end{equation*}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema del Resto}
+\\ $f \in \cuerpo_{[x]} \comma a \in \cuerpo$. Entonces $r_{x-a}(f)=f(a)$
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones del Teorema del Resto}
+\begin{enumerate}
+    \item $f,g \in \cuerpo_{[x]} \comma g \neq 0 \tq g|f$ en $\cuerpo_{[x]} \comma a \in \cuerpo$. Entonces:
+\begin{equation*}
+    \text{Si } g(a)=0 \Rightarrows f(a)=0
+\end{equation*}
+    \item $f,g \in \cuerpo_{[x]}$ no ambos nulos, $a \in \cuerpo$. Entonces:
+    \begin{equation*}
+        f(a)=0 \lands g(a)=0 \Leftrightarrows (g:f)_{(a)}=0
+    \end{equation*}
+\end{enumerate}
+}}
+
+\subsection{Lema de Gauss}
+Sea $p=a_nx^n+...+a_1x^1+a_0 \in \enteros_{[x]}\comma a_n \neq 0 \lands a_0 \neq 0$. Entonces:
+\begin{equation*}
+    \text{Si } r,s \in \enteros-\{0\} \text{ con } r \bot s \lands p(\frac{r}{s})=0 \Rightarrows r|a_0 \lands s|a_n
+\end{equation*}
+
+\subsection{Polinomio Interpolador de Lagrange}
+\underline{Definición}: Sean $a_0,a_1,...a_n;b_0,b_1,...,b_n \in \complejos \comma n \geq 1 \comma a_i \neq a_j \text{ si } i \neq j$. Entonces:
+\begin{equation*}
+    f\eq \sum_{k=0} ^n b_k \underbrace{(\prod_{0 \leq j \leq n} \frac{x-a_j}{a_k-a_j})}_{L_k} \eq \sum_{k=0}^n b_k * L_k \text{ con $j \neq k$}
+\end{equation*}
+es el \emph{único polinomio $\in \complejos_{[x]}$ nulo o de grado $\leq n$} que satisface:
+\begin{equation*}
+    f(a_k)\eq b_k \comma 0 \leq k \leq n
+\end{equation*}
+\underline{Nota}: Este polinomio sirve para encontrar polinomios de \emph{grado mínimo} que \emph{pasen por más de un punto}.
+
+\subsection{Multiplicidad de una raíz}
+\underline{Definición}: Sea $f \in \cuerpo_{[x]}$ no nulo. Entonces, sea $m \in \naturales_0$, se dice que $a \in \cuerpo$ es \emph{raíz de multiplicidad m de f} si:
+\begin{equation*}
+    (x-a)^m|f \lands (x-a)^{m-1}\cancel{|}f
+\end{equation*}
+o equivalentemente:
+\begin{equation*}
+    \exists q \in \cuerpo_{[x]} \tq f = (x-a)^m * q \comma q(a)\neq 0
+\end{equation*}
+De esta manera, decimos que
+\begin{enumerate}
+    \item $a$ es \emph{raíz simple} de $f$ si:
+    \begin{equation*}
+        (x-a)|f \lands (x-a)^2 \cancel{|} f
+    \end{equation*}
+    \item $a$ es \emph{raíz múltiple} de $f$ si:
+    \begin{equation*}
+        (x-a)^2 | f
+    \end{equation*}
+\end{enumerate}
+\underline{Notación}: $mult(a,f)=m$ ("la multiplicidad de a en f es m")
+\subsubsection*{Propiedades}
+Sea $f \in \cuerpo_{[x]} \comma a \in \cuerpo$. Entonces:
+\begin{enumerate}
+    \item a es raíz múltiple de $f \Leftrightarrows f(a)=0 \lands f'(a)=0$
+    \item a es raíz simple de $f \Leftrightarrows f(a)=0 \lands f'(a)\neq 0$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 6.C}
+\\ $f \in \cuerpo_{[x]} \comma a \in \cuerpo$. Entonces:
+\begin{equation*}
+    mult(a,f)=m \Leftrightarrows f(a)=f'(a)=...=f^{m-1}(a)=0 \lands f^m(a)\neq 0
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema Fundamental del Álgebra}
+\begin{equation*}
+    f \in \complejos_{[x]} \text{ no constante } \Rightarrows \exists a \in \complejos \tq f(a)=0
+\end{equation*}
+Equivalentemente, todo polinomio no constante de grado n en $\complejos_{[x]}$ \\tiene n raíces contando su multiplicidad.
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones}
+\begin{equation*}
+1. \;\; f \in \reales_{[x]} \comma z \in \complejos - \reales \Rightarrows f(z)=0 \Leftrightarrows f(\overline{z})=0
+\end{equation*}
+\begin{equation*}
+2. \;\; f \in \racionales_{[x]} \comma a,b,c \in \enteros \Rightarrows f(a+b\sqrt{c})=0 \Leftrightarrows f(a-b\sqrt{c})=0
+\end{equation*}
+}}
+\pagebreak
+
+%-------------------------------------------%
+\section{Sumas - Recurrencias}
+\underline{Definición}:
+\begin{equation*}
+    \sumatoria{k=i}{n} a_k \eq \sumatoria{i \leq k \leq n}{} a_k \eq a_i + a_{i+1}  + a_{i+2} + ... + a_n
+\end{equation*}
+\subsubsection*{Propiedades}
+\begin{enumerate}
+    \item \textbf{Ley distributiva}
+    \begin{equation*}
+        \sumatoria{k=i}{n} c.a_k \eq c \sumatoria{k=i}{n} a_k
+    \end{equation*}
+    \item \textbf{Ley Asociativa}
+    \begin{equation*}
+        \sumatoria{k=i}{n} (a_k + b_k) \eq \sumatoria{k=i}{n} a_k + \sumatoria{k=i}{n} b_k
+    \end{equation*}
+    \item \textbf{Ley Conmutativa}
+    \begin{equation*}
+        \sumatoria{k=i}{n} a_k \eq \sumatoria{k=i}{n} a_{p(k)}
+    \end{equation*}
+    siendo $p: I \rightarrow I$ una \emph{función biyectiva}, $I = {i,i+1,...,n}$
+    \item \textbf{Cambio de Índice}
+    \begin{equation*}
+        \sumatoria{k\in I}{} a_k \eq \sumatoria{j \in J}{} a_{g(j)}
+    \end{equation*}
+    siendo $g: J \rightarrow I"$ una \emph{función biyectiva}, y $J, I$ conjuntos finitos. 
+    \\Esta propiedad nos permite elegir si priorizamos la fórmula o el conjunto de índices.
+\end{enumerate}
+
+\subsection{Sumas Famosas}
+El objetivo es lograr que las sumas se parezcan a estas y luego usar la fórmula cerrada (la de la derecha).
+\begin{enumerate}
+    \item \textbf{Suma de Gauss}
+    \begin{equation*}
+        \sumatoria{k=1}{n} k \eq \frac{n(n+1)}{2}
+    \end{equation*}
+    \item \textbf{Suma Geométrica}
+    \begin{equation*}
+        \sumatoria{k=0}{n} x^k \eq \frac{1-x^{n+1}}{1-x} \text{ con } x \neq 1
+    \end{equation*}
+\end{enumerate}
+
+\subsection{Sumas Múltiples}
+\underline{Definición}:
+\begin{enumerate}
+    \item \textbf{Índices Independientes}
+    \begin{equation*}
+        \sumatoria{1 \leq j \comma i \leq n}{} a_{ij} \eq \sumatoria{i=1}{n} \sumatoria{j=1}{n} a_{ij}
+    \end{equation*}
+    \item \textbf{Índices Dependientes}
+    \begin{equation*}
+        \sumatoria{1 \leq i \lneq j \leq n}{a_{ij}} \eq \sumatoria{i=1}{n-1} \sumatoria{j=i+1}{n} a_{ij} \eq \sumatoria{j=2}{n} \sumatoria{i=1}{j-1} a_{ij}
+    \end{equation*}
+\end{enumerate}
+\underline{Nota}: En sumas de 3 índices dependientes, la letra que está en el medio \\SIEMPRE se queda en el medio.
+
+\subsection{Sucesiones}
+\underline{Definición}: Una sucesión de elementos de A es una función $f: \naturales \rightarrow A \tq \underbrace{f(1)}_{a_1},\underbrace{f(2)}_{a_2},\underbrace{f(3)}_{a_3},...$
+\\\underline{Notación}: $a_n$, con $n \in \naturales$
+\\Además, pueden definirse de dos maneras:
+\begin{enumerate}
+    \item \textbf{Definida Explícitamente}
+    \begin{equation*}
+        a_n \eq f(n)
+    \end{equation*}
+    \item \textbf{Definida Implícitamente}
+        \begin{equation*}
+            \begin{cases}
+                a_0=3 &\text{ ("Valor Inicial")} \\
+                a_n = 3a_{n-1} \text{ con } n \in \naturales &\text{ ("Relación de Recurrencia")}
+            \end{cases}
+    \end{equation*}
+    En este caso el objetivo es llegar a la fórmula explícita.
+\end{enumerate}
+
+\subsection{Relaciones de Recurrencia Lineal de Orden K}
+\underline{Definición}: Las relaciones de recurrencia lineal son ecuaciones de la forma:
+\begin{equation*}
+    \alpha_0(n)a_n + \alpha_1(n)a_{n-1} + ... + \alpha_k(n)a_{n-k} = f(n) \text{ con } \alpha_0 \neq 0 \text{ y } \alpha_k \neq 0
+\end{equation*}
+Además,
+\begin{enumerate}
+    \item Si las funciones $\alpha_j: \naturales \rightarrow \complejos$ son constantes, entonces se dice que la relación de recurrencia tiene \emph{coeficientes constantes}.
+    \item Si $f$ es la función nula se dice que la relación de recurrencia lineal es \emph{homogénea}, sino se dice que es \emph{no homogénea}.
+    \item $\alpha_0(n)a_n + \alpha_1(n)a_{n-1} + ... + \alpha_k(n)a_{n-k} = 0$ es la \emph{relación homogénea asociada} a (11).
+    \item El \emph{orden} de la relación es la diferencia entre el n más grande y el n más chico.
+\end{enumerate}
+\subsubsection{Relaciones de Orden 1}
+\subsubsection*{Relaciones de Recurrencia Lineal de Orden 1 con Coeficientes Constantes Homogéneas}
+\underline{Definición}: Hay dos maneras de definir este tipo de relaciones:
+\begin{enumerate}
+    \item \emph{Recursiva}: $X_n + \alpha X_{n-1} = 0 \text{ con } \alpha \in \complejos-\{0\} \comma n \geq 1$
+    \item \emph{Explícita}: $X_n = Kr^n$ (El objetivo es llegar de la forma recursiva a la explícita)
+\end{enumerate}
+\subsubsection*{Relaciones de Recurrencia Lineal de Orden 1 con Coeficientes Constantes NO Homogéneas}
+\underline{Definición}: Hay dos maneras de definir este tipo de relaciones:
+\begin{enumerate}
+    \item \emph{Recursiva}: 
+    \begin{equation*}
+        \begin{cases}
+        X_n + \alpha X_{n-1} = T &\text{ con } \alpha , T \in \complejos-\{0\} \comma n \geq 1 \\
+        X_0 &
+        \end{cases}
+    \end{equation*}
+    \item \emph{Explícita}: 
+    \begin{equation*}
+        \begin{cases}
+        X_n = (-1)^n \alpha^n X_0 + T(\frac{(-\alpha)^n-1}{-\alpha-1}) &\text{ si } \alpha \neq -1 \\
+        X_n = X_0 + nT &\text{ si } \alpha = -1
+        \end{cases}
+    \end{equation*}
+\end{enumerate}
+\subsubsection{Relaciones de Orden 2}
+\subsubsection*{Relaciones de Recurrencia Lineal con Coeficientes Constantes de Orden 2}
+\underline{Definición}: 
+\begin{equation*}
+    \begin{cases}
+        X_n+\alpha_1X_{n-1}+\alpha_2X_{n-2} = f(n)  &\text{ con }\alpha_1 \in \complejos, \alpha_2 \in \complejos-\{0\}, n \geq 2 \\
+        X_0 \comma X_1 &
+    \end{cases}
+\end{equation*}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 7.A}
+\\ Si $Y_n$ y $Z_n$ son \emph{soluciones de la relación de recurrencia} y además
+\begin{equation*}
+    Y_0 = Z_0 \lands Y_1 = Z_1 \Rightarrows Y_n = Z_n \forall n \geq 0
+\end{equation*}
+}}
+\subsubsection*{Propiedades}
+Sea $X_n+\alpha_1X_{n-1}+\alpha_2X_{n-2} = 0  \text{ con }\alpha_1 \in \complejos, \alpha_2 \in \complejos-\{0\}, n \geq 2$. 
+\\Entonces,
+\begin{enumerate}
+    \item $X_n = r^n$ es solución de la ecuación $\Leftrightarrows  \underbrace{r^2+\alpha_1 r + \alpha_2}_{\substack{\text{"Polinomio característico} \\ \text{de la relación de recurrencia"}}} = 0$
+    \item Si $Y_n$ y $Z_n$ son soluciones de la relación de recurrencia \\$\Rightarrows aY_n + bZ_n$ es solución $\forall a,b \in \complejos$
+    \item Si $r^2+\alpha_1 r + \alpha_2$ tiene 2 raíces distintas $r_1$ y $r_2$
+            \\$\Rightarrows$ la \emph{solución general} de la relación es $X_n = Ar_1^n + br_2^n$ con $A, B \in \complejos$
+    \item Si $r^2 + \alpha_1 r + \alpha_2$ tiene una raíz doble $r_1$
+            \\$\Rightarrows$ la \emph{solución general} de la relación $X_n=Ar_1^n+Bnr_1^n$ con $A,B \in \complejos$
+\end{enumerate}
+
+\subsection{Relaciones de Recurrencia Lineal NO Homógeneas}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 7.B}
+\\ Sea $Y_n$ la solución general de $X_n+\alpha_1X_{n-1}+...+\alpha_kX_{n-k} =f(n)$ y sea $Y_n ^p$ una \emph{solución particular} de la misma relación de recurrencia
+\\ $\Rightarrows Y_n-Y_n ^p$ es solución de la relación de recurrencia homogénea asociada    
+\\ $\therefore$ La solución general es $Y_n=Y_n ^p + Y_n ^H$
+}}
+\subsubsection*{Método para hallar una solución particular (Orden 1 ó 2)}
+Hay dos casos posibles:
+\begin{enumerate}
+    \item $X_n + \alpha X_{n-1} + \beta X_{n-2} = p(n) \lambda^n$
+    \\ donde $p(n)$ es un polinomio de grado k y $\lambda \in \reales-\{0\}$, vamos a proponer como solución particular:
+    \begin{equation*}
+        X_n ^p = q(n) \lambda^n n^s
+    \end{equation*}
+    donde $q(n)$ es un polinomio de grado k, y $s$ es la multiplicidad de $\lambda$ como raíz del polinomio característico asociado a la ecuación.
+    \item $X_n + \alpha X_{n-1} + \beta X_{n-2} = f(n)$ 
+    \\ donde $f(n)=p(n)\lambda^ncos(\alpha n)$ ó $f(n)=p(n)\lambda^n sen(\alpha n)$ siendo $p(n)$ un polinomio de grado k, $\lambda \in \reales-\{0\} \comma \alpha \in \reales-\{0\}$. Proponemos:
+    \begin{equation*}
+        X_n = \lambda^n n^s (q_1(n)cos(\alpha n) + q_2(n)sen(\alpha n))
+    \end{equation*}
+    $q_1(n)$ y $q_2(n)$ son polinomios de grado k, y s es la multiplicidad de \\$z=cos(\alpha n)+ isen(\alpha n)$ como raíz del polinomio característico.
+\end{enumerate}
+\subsubsection*{Solución en Complejos}
+\begin{equation*}
+    X_n + \alpha_1 X_{n-1} + \beta X_{n-2} = 0 \text{ con } \alpha \in \reales \comma \beta \in \reales-\{0\}
+\end{equation*}
+El polinomio característico asociado tiene raíces $a+bi$ y $a-bi$ con $a,b \in \reales$. Entonces, la solución general es:
+\begin{equation*}
+    X_n = A(a+bi)^n + B(a-bi)^n
+\end{equation*}
+La solución de arriba está bien pero \textbf{hay que escribirla de esta manera}:
+\begin{equation*}
+    X_n = \vabs{z} ^n (Ccos(n\theta)+ Dsen(n\theta))
+\end{equation*}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Principio de superposición}
+\\ Si $Y_n$ es una solución particular de $X_n+\alpha X_{n-1} + \beta X_{n-2}=f(n)$ y
+\\ $Z_n$ es una solución particular de $X_n+\alpha X_{n-1} + \beta X_{n-2}=g(n)$
+\\ $\Rightarrows Y_n + Z_n$ es solución particular de $X_n+\alpha X_{n-1} + \beta X_{n-2}=f(n) + g(n)$
+}}
+
+\subsection{Relaciones de Recurrencia Lineales de Mayor Orden}
+\begin{equation*}
+    X_n + \alpha_1 X_{n-1} + ... + \alpha_k X_{n-k} = F(n)
+\end{equation*}
+La \emph{solución general} es: $X_n = X_n ^H + X_n ^p$
+\\La \emph{solución particular} es: Análogo a lo visto en 7.5
+\\La \emph{solución homogénea} es: 
+\\  Propongo $X_n = r^n \Rightarrows r^n + \alpha_1 r^{n-1} + ... + \alpha_k =0$
+\begin{enumerate}
+    \item Cada raíz proporciona tantas soluciones como su multiplicidad
+    \item Si la raíz $r_i \in \reales$ tiene multiplicidad k $\Rightarrows r_i ^n, nr_i ^n, ... , n^{k-1}r_i^n$ son soluciones.
+    \item Si la raíz $z=r(cos(\alpha)+isen(\alpha))$ tiene multiplicidad k
+    \\ $\Rightarrows r^ncos(n\alpha),r^nsen(n\alpha),nr^ncos(n\alpha),nr^nsen(n\alpha),...,n^{k-1}r^ncos(n\alpha),n^{k-1}r^nsen(n\alpha)$ son soluciones.
+\end{enumerate}
+\pagebreak
+
+%-------------------------------------------%
+\section{Sistemas de Ecuaciones Lineales}
+\underline{Definición}:
+\begin{equation*}
+    \begin{cases}
+        a_{11}x_1 + a_{12}x_2 + ... + a_{1k}x_k \;=& b_1 \\
+        a_{21}x_1 + a_{22}x_2 + ... + a_{2k}x_k \;=& b_2 \\
+        \vdots &  \\
+        a_{n1}x_1 + a_{n2}x_2 + ... + a_{nk}x_k \;=& b_n
+    \end{cases}
+\end{equation*}
+Es un sistema lineal con k incógnitas $x_1, x_2, ..., x_k$ con n ecuaciones. Donde $b_j$ son los \emph{términos independientes} y $a_{ik} \in \cuerpo$ son los \emph{coeficientes} del sistema.
+\subsubsection*{Matrices Asociadas al Sistema}
+\begin{equation*}
+    \text{A = }
+    \underbrace{\begin{bmatrix}
+        a_{11} & a_{12} & \cdots & a_{1k} \\
+        a_{21} & a_{22} & \cdots & a_{2k} \\
+        \vdots & \\
+        a_{n1} & a_{n2} & \cdots & a_{nk} \\
+    \end{bmatrix}}_{\text{Matriz de coeficientes}}
+    %
+    \text{x = }
+    \underbrace{\begin{bmatrix}
+        x_1 \\ x_2 \\ \vdots \\ x_k
+    \end{bmatrix}}_{\substack{\text{Vector de}\\\text{incógnitas}}}
+    %
+    \text{b = }
+    \underbrace{\begin{bmatrix}
+        b_1 \\ b_2 \\ \vdots \\b_n
+    \end{bmatrix}}_{\substack{\text{Vector de}\\\text{términos}\\\text{independientes}}}
+\end{equation*}
+Si $b = 0 \Rightarrows \underbrace{\text{\emph{Sistema homogéneo}}}_{\text{Siempre tienen solución}}$
+\\\\\underline{Notación}: \begin{align}
+                            \emph{Matriz ampliada del Sistema} &: [A | b] \\
+                            \emph{Sistema escrito matricialmente} &: Ax =b
+                        \end{align}
+                        
+\subsection{Operaciones Válidas}
+Si en un sistema de ecuaciones lineales se realizan las siguientes operaciones se obtiene un \emph{sistema equivalente}(i.e. con el mismo conjunto solución)
+\begin{enumerate}
+    \item Intercambiar ecuaciones.
+    \item Multiplicar una ecuación por un número $\lambda \in \cuerpo^*$.
+    \item Sumar a una ecuación un múltiplo de otra.
+\end{enumerate}
+En términos de la matriz ampliada del sistema estas operaciones se traducen a lo que llamamos \emph{operaciones elementales}:
+\begin{enumerate}
+    \item $F_i \leftrightarrow F_j$
+    \item $F_i = \lambda F_i \comma \lambda \neq 0$
+    \item $F_i = F_i + \alpha F_j$
+\end{enumerate}
+
+\subsection{Matrices equivalenetes}
+\subsubsection*{Equivalencia por filas}
+\underline{Definción}: Sean A y B matrices de $n \times k$. Decimos que \emph{A es equivalente por filas a B} si aplicando finitas operaciones elementales a A se obtiene B.
+\\\underline{Notación}: $A \thicksim B$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones}
+\begin{enumerate}
+    \item A, B de $n \times k$. Entonces,
+    \begin{equation*}
+        A\relates B \text{ si } A \thicksim B \comma \text{R es de equivalencia}
+    \end{equation*}
+    \item Si $[A | b] \thicksim [A' | b'] \Rightarrows Ax=b \lands A'x=b'$ son equivalentes
+\end{enumerate}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 8.A}
+\\Dada una matriz A de $n \times k$, existe una única matriz E en FER$\tq A \thicksim E$
+}}
+\subsubsection*{Forma Escalonada (FE)}
+\underline{Definición}: Una matriz A de $n \times k$ está en FE si:
+\begin{enumerate}
+    \item En cada fila no nula, el primer numero es un 1 ("uno principal").
+    \item Cada uno principal de una fila está mas a la derecha que el uno principal de la fila que está arriba.
+    \item Si hay filas nulas tienen que estar abajo.
+\end{enumerate}
+\subsubsection*{Forma Escalonada Reducida (FER)}
+\underline{Definición}: Una matriz A de $n \times k$ está en FER si:
+\begin{enumerate}
+    \item Está en FE.
+    \item En la columna donde está el uno principal todos los demas números son 0.
+\end{enumerate}
+
+\subsection{Métodos de Eliminación}
+\subsubsection*{Método de Eliminiación Gaussiana (MEG)}
+\underline{Definción}: Dada la matriz $[A|b]$ ampliada de un sistema lineal, aplicar el MEG es obtener E \emph{escalonado}$\tq [A|b] \thicksim E$.
+\subsubsection*{Método de Eliminación de Gauss-Jordan (MEGJ)}
+\underline{Definción}: Dada la matriz $[A|b]$ ampliada de un sistema lineal, aplicar MEGJ es obtener E \emph{escalonado reducido}$\tq [A|b] \thicksim E$.
+
+\subsection{Rango de una matriz}
+\underline{Definición}: Dada A de $n \times k$, el rango de A es la \emph{cantidad de unos principales de la matriz escalonada reducida asociada a A}.
+\\\underline{Notación}: R(A) = rango(A) = Rg(A)
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones}
+\begin{enumerate}
+    \item $Rg(A) \leq min\{\underbrace{n}_{\text{filas}},\underbrace{k}_{\text{columnas}}\}$
+    \item E', E escalonadas$\tq E \thicksim A \lands E' \thicksim A$
+    \\$\Rightarrows$ la cant. de 1s principales de E = la cant. de 1s principales de E'
+\end{enumerate}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario de la definción}
+\\El Rg(A) es la \emph{cantidad de 1s principales de cualquier matriz E escalonada}$\tq E \thicksim A$
+}}
+
+\subsection{Clasificación de los Sistemas Lineales}
+Sea $[A|b]$ la matriz ampliada de un sistema. Entonces:
+\begin{enumerate}
+    \item $Rg(A) = Rg[A|b] \Rightarrows$ "Sistema Compatible" (SC)(i.e. tiene solución)
+    \begin{enumerate}
+        \item $Rg(A) =$ cant. variables/columnas \\$\Rightarrows$ "Sistema Compatible Determinado" (SCD)(i.e. tiene solución única)
+        \item $Rg(A) \neq$ cant. variables/columnas \\$\Rightarrows$ "Sistema Compatible Indeterminado" (SCI)(i.e. tiene infinitas soluciones)
+    \end{enumerate}
+    \item $Rg(A) \neq Rg[A|b] \Rightarrows$ "Sistema Incompatible" (SI)(i.e. no tiene solución)
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolarios}
+\begin{enumerate}
+    \item Si el sistema es homogéneo $\Rightarrow$ el sistema es compatible
+    \item La compatibilidad o incompatibilidad depende de A y de b. Puede pasar que $Ax=b_1$ sea compatible y que $Ax=b_2$ sea incompatible.
+    \item Si $Ax=b_1$ es compatible$\lands Ax=b_2$ es compatible \\$\Rightarrow$ ambos son SCD $\vee$ ambos son SCI
+\end{enumerate}
+}}
+\\\\\\\underline{Nota}: cant. de variables libres = cant. variables - Rg(A)
+
+%-------------------------------------------%
+\section{Matrices}
+\underline{Definición}: $\cuerpo^{n \times m} \eq \{A \tq A \text{ es un conjunto con n filas y m columnas con coeficientes en } \cuerpo\}$
+\\\\\textbf{Matriz Identidad}: $I_n \in \reales^{n \times m}\tq (I_n)_{ij}=
+\begin{cases}
+   1 &\text{ si } i=j \\ 
+   0 &\text{ si } i\neq j
+\end{cases}
+$
+\\\textbf{Matriz Nula}: $0_{ij}\eq 0$
+
+\subsection{Operaciones entre matrices}
+\begin{enumerate}
+    \item \textbf{Producto por escalar}
+       \\Si $A \in \cuerpo^{n \times m} \comma \alpha \in \cuerpo$. Entonces,
+       \begin{equation*}
+           B \eq \alpha A \in \cuerpo^{n \times m} \Leftrightarrows B_{ij} \eq \alpha A_{ij}
+       \end{equation*}
+    \item \textbf{Suma}
+    \\ $A,B \in \cuerpo^{n \times m}$. Entonces,
+    \begin{equation*}
+        C \eq A + B \in \cuerpo ^{n \times m} \Leftrightarrows C_{ij} \eq A_{ij} + B_{ij}
+    \end{equation*}
+    \item \textbf{Producto}
+    \\$A \in \cuerpo^{n \times m} \lands B \in \cuerpo^m \times r$ (es decir, el nro de columnas de A TIENE que coincidir con el de filas de B, o viceversa). Entonces,
+    \begin{equation*}
+        C \eq A * B \Leftrightarrows C_{ij} \eq \sumatoria{k=1}{m} A_{ik} * B_{kj}
+    \end{equation*}
+    Osea se multiplica la \emph{Fila de A con la Columna de B}.
+\end{enumerate}
+\subsubsection*{Propiedades}
+Sean $A,B,C$ matrices, $\alpha,\beta \in \cuerpo$. Entonces,
+\begin{enumerate}
+    \item $A+B\eq B+A$
+    \item El producto entre matrices \emph{NO siempre es conmutativo}.
+    \item $A+(B+C) = (A+B)+C$
+    \item $A + 0 = A$
+    \item Para cada $A \in \cuerpo^{n \times m} \comma \exists (-A) \in \cuerpo^{n \times m} \tq A+(-A)=0$
+    \item $A*(B*C)=(A*B)*C$
+    \item $A*I = A \comma I*A=A$
+    \item $A*0=0 \comma 0*A=0$
+    \item $A*(B+C) = A*B + A*C$ y $(B+C)*A = B*A + B*C$
+    \item $\alpha*(A+B)=\alpha*A + \alpha *B$
+    \item $\alpha * (A*B) = (\alpha*A)*B$
+    \item $(\alpha + \beta) * A = \alpha * A + \beta * A$
+    \item $\alpha * A = A * \alpha$
+    \item $(-1)*A=-A$
+    \item $(\alpha*A)^t = \alpha * A^t$
+    \item $ (A+B)^t=A^t+B^t$
+    \item $(A*B)^t = B^t * A^t$
+    \item $(A^k)^t = (A^t)^k \; \forall k \in \naturales$
+\end{enumerate}
+
+\subsection{Otros tipos de matrices}
+\begin{enumerate}
+    \item \textbf{Matriz Diagonal}
+    \\$A \in \cuerpo^{n \times m}$ es diagonal si $A_{ij}=0$ si $i \neq j$
+    \item \textbf{Matriz Triangular Superior}
+    \\$A \in \cuerpo^{n \times m}$ es triangular superior si $A_ij=0$ cuando $i \gneq j$
+    \item \textbf{Matriz Triangular Inferior}
+    \\$A \in \cuerpo^{n \times m}$ es triangular inferior si $A_ij=0$ cuando $i \lneq j$
+    \item \textbf{Matriz Traspuesta}
+    \\$A \in \cuerpo^{n \times m}$ se define $A^t \in \cuerpo^{n \times m} \tq (A^t)_{ij}=A_{ji}$
+    \item \textbf{Matriz Simétrica}
+    \\$A \in \cuerpo^{n \times n}$ es simétrica si $A^t=A$
+    \item \textbf{Matriz Antisimétrica}
+    \\$A \in \cuerpo^{n \times n}$ es antisimétrica si $A^t=-A$. Además, en la \emph{diagonal tiene que haber solo 0s}.
+\end{enumerate}
+
+\subsection{Inversas}
+\underline{Definición}: Sea $A \in \cuerpo^{n \times n}$, decimos que $B \in \cuerpo^{n \times n}$ \emph{es inversa de A} si: 
+\begin{equation*}
+    A*B=Id \lands B*A=Id
+\end{equation*}
+Además, decimos que $A \in \cuerpo^{n \times n}$ \emph{es inversible} si tiene inversa.
+\\\underline{Notación}: $A^{-1}$ es la inversa de $A$, y viceversa.
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 9.A}
+\\$A$ inversible $\Rightarrows A$ tiene una única inversa
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 9.B}
+\\Sea $A \in \cuerpo^{n \times n}$ inversible. Entonces,
+\begin{equation*}
+    Ax=b \text{ es SCD y Sol=}\{A^{-1}*b\}
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario}
+\\Sea $A \in \cuerpo^{n \times n}$, $Rg(A) \lneq n \Rightarrows A$ no es inversible
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 9.C}
+\\Sea $A \in \cuerpo^{n \times n} \lands Rg(A) = n \Rightarrows A$ es inversible
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 9.D}
+\\$A, B \in \cuerpo^{n \times n}$ inversibles. Entonces,
+\begin{equation*}
+    A*B \text{ es inversible y } (A*B)^{-1}=B^{-1}*A^{-1}
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 9.E}
+\\$A, B \in \cuerpo^{n \times n}$ inversibles $\lands A*B$ inversible $\Rightarrows \exists A^{-1},B{-1}$
+}}
+
+\subsubsection*{Resumen del resumen}
+Sea $A \in \cuerpo^{n \times n}$ (A matriz cuadrada). Son equivalentes:
+\begin{enumerate}
+    \item $Rg(A)=n$
+    \item $A$ es inversible
+    \item $Ax=b$ es SCD
+    \item $Ax=0$ es SCD
+    \item $A \thicksim Id$
+\end{enumerate}
+
+\subsection{Cheatsheet de producto de matrices}
+Esto es útil para encontrar contraejemplos.
+\begin{enumerate}
+    \item \begin{equation*}\begin{bmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}
+    %
+    =
+    %
+    \begin{bmatrix}
+        c & d \\
+        a & b
+    \end{bmatrix}
+    %
+    \;\;\;\;F_1 \leftrightarrow F_2
+\end{equation*}
+    \item \begin{equation*}\begin{bmatrix}
+        \alpha  & 0 \\
+        0 & 1
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}
+    %
+    =
+    %
+    \begin{bmatrix}
+        \alpha a & \alpha b \\
+        c & d
+    \end{bmatrix}
+    %
+    \;\;\;\;F_1 = \alpha F_1
+\end{equation*}
+    \item \begin{equation*}\begin{bmatrix}
+        1  & 0 \\
+        \alpha & 1
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}
+    %
+    =
+    %
+    \begin{bmatrix}
+        a & b \\
+        \alpha a + c & \alpha b + d
+    \end{bmatrix}
+    %
+    \;\;\;\;F_2 = \alpha F_1 + F_2
+\end{equation*}
+    \item \begin{equation*}    
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+        \alpha  & 0 \\
+        0 & 1
+    \end{bmatrix}
+    %
+    =
+    %
+    \begin{bmatrix}
+        \alpha a & b \\
+        \alpha c & d
+    \end{bmatrix}
+    %
+    \;\;\;\;C_1 = \alpha C_1
+\end{equation*}
+    \item \begin{equation*}    
+    \begin{bmatrix}
+        a & b \\
+        c & d
+    \end{bmatrix}
+    %
+    \begin{bmatrix}
+        1  & 0 \\
+        \alpha & 1
+    \end{bmatrix}
+    %
+    =
+    %
+    \begin{bmatrix}
+        a + \alpha b & b \\
+        c + \alpha d & d
+    \end{bmatrix}
+    %
+    \;\;\;\;C_1 = \alpha C_2 + C_1
+\end{equation*}
+\end{enumerate}
+\pagebreak
+
+%-------------------------------------------%
+\section{Espacios Vectoriales}
+\underline{Definción}: Un espacio vectorial es una estrucutura algebraica que consta de dos conjuntos y dos operaciones $(V \comma \cuerpo \comma \oplus \comma \otimes)$.
+\begin{itemize}
+    \item Los elementos de V se llaman \emph{vectores}.
+    \item Los elementos de $\cuerpo$ se llaman \emph{escalares}. ($\cuerpo$ es un cuerpo $\tq \cuerpo = \reales$ ó $\complejos$)
+\end{itemize}
+Las operaciones deben cumplir que:
+\begin{equation*}
+    \oplus : V \times V \rightarrow V
+\end{equation*}
+\begin{equation*}
+    \otimes : \cuerpo \times V \rightarrow V
+\end{equation*}
+Para que una estructura se considere espacio vectorial tiene que cumplir 8 propiedades:
+\begin{enumerate}
+    \item $u \oplus v = v \oplus u$
+    \item $u \oplus (v \oplus w) = (u \oplus v) \oplus w$
+    \item $\exists 0 \in V\tq V \oplus 0 = V$ (0 denota el elemento neutro de la suma)
+    \item Dado $v \in V \comma \exists (-v) \in V \tq v \oplus (-v) = 0$
+    \item $1 \otimes V = V \comma 1 \in \cuerpo$ (1 denota el neutro de la multiplicación)
+    \item $\alpha \otimes (v \oplus w) = \alpha \otimes v \oplus \alpha \otimes w$
+    \item $(\alpha + \beta) \otimes v = \alpha \otimes v \oplus \beta \otimes v$
+    \item $(\alpha * \beta ) \otimes v = \alpha \otimes (\beta \otimes v)$
+\end{enumerate}
+\underline{Notación}: V es un $\cuerpo$-ev ("V es un $\cuerpo$ espacio vectorial")
+\subsubsection*{Propiedades de los espacios vectoriales}
+\begin{enumerate}
+    \item El neutro para la suma \emph{es único}.
+    \item $0 * v = 0_v$ con $0,0_v \in \cuerpo$
+    \item $\alpha * 0_v = 0_v$
+    \item $\alpha * v = 0 \Rightarrows \alpha = 0 \vees v = 0_v$
+    \item El opuesto de un vector \emph{es único}.
+    \item $(-1) * v  = -v$ con $(-1) \in \cuerpo \comma v,-v \in V$
+    \item $\alpha * \sumatoria{i=1}{r} v_i = \sumatoria{i=1}{r} \alpha * v_i$ con $\alpha \in \cuerpo \comma v_i \in V$
+\end{enumerate}
+
+\subsection{Subespacios Vectoriales}
+\underline{Definción}: Sea V un $\cuerpo$-ev con operaciones $\otimes\comma \oplus$. 
+Decimos que \emph{S es un subespacio de V} si:
+\begin{enumerate}
+    \item $(S \comma \cuerpo \comma \oplus \comma \otimes)$ es un espacio vectorial.
+    \item $S \subseteq V$
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.A}
+\\Sea V un $\cuerpo$-ev. S es un subespacio de V si:
+\begin{enumerate}
+    \item $S \subseteq V$
+    \item $0_v \in S$
+    \item $v,w \in S \Rightarrows v + w \in S$
+    \item $\alpha \in \cuerpo \comma v \in S \Rightarrows \alpha*v \in S$
+\end{enumerate}
+}}
+
+\subsection{Combinación Lineal}
+\underline{Definción}: Dado V un $\cuerpo$-ev. 
+Sean $v_1 \comma v_2 \comma ... \comma v_n \in V \comma w \in V$.
+Decimos que \emph{w es combinación lineal de $v_1 \comma ... \comma v_n$} si existen $\alpha_1 \comma ... \alpha_n \in \cuerpo$ tal que:
+\begin{equation*}
+    w = \alpha_1 *v_1 + \alpha_2 *v_2 + ... + \alpha_n *v_n = \sumatoria{i=1}{n} \alpha_i *v_i
+\end{equation*}
+
+\subsection{Espacio generado por un conjunto de vectores}
+\underline{Definición}: Sea V un $\cuerpo$-ev.
+Sea $G=\{v_1,...,v_n\} \subseteq V$. Entonces,
+\begin{eqnarray*}
+    gen(G) = gen\{v_1,...,v_n\} &=& \{ v \in V \tq \text{v es combinación lineal de los elementos de G } \} = \\
+                                &=& \{ v \in V \tq \exists \alpha_1,...,\alpha_n \in \cuerpo \text{ tal que } v=\sumatoria{i=1}{n}  \alpha_i v_i \}
+\end{eqnarray*}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.B}
+\\V es un $\cuerpo$-ev.
+Sea $G=\{v_1,...,v_r\} \subseteq V$.
+Entonces $S = gen(G)$ es un subespacio de V.
+}}
+
+\subsection{Conjunto generador de un subespacio}
+\underline{Definción}: V un $\cuerpo$-ev. 
+El conjunto $G=\{v_1,...,v_r\}$ es un conjunto generador del subespacio $S \subseteq V$ si $S = gen\{v_1,...v_r\}$
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.C}
+\\V es un $\cuerpo$-ev.
+\begin{equation*}
+    gen\{v_1 \comma ... \comma v_r \} = gen \{v_1 \comma v_r \comma v_{r+1} \} \Leftrightarrows v_{r+1} \in gen \{v_1 \comma ... \comma v_3 \}
+\end{equation*}
+}}
+
+\subsection{Independecia/Dependencia Lineal}
+\underline{Definciones}:
+\begin{itemize}
+    \item El conjunto $\{ v_1 \comma v_2 \comma ... \comma v_r \}$ es \emph{linealmente independendiente} (li) si:
+    \begin{equation*}
+        \alpha_1 * v_1 + \alpha_2 * v_2 + ... + \alpha_r v_r = 0_v \Rightarrows \alpha_i = 0 \text{ con } 1 \leq i \leq r
+    \end{equation*}
+    \begin{equation*}
+        v_j \in V \comma \alpha_j \in \cuerpo \text{ con } 1 \leq j \leq r
+    \end{equation*}
+    \item El conjunto $\{ v_1 \comma v_2 \comma ... \comma v_r \}$ es \emph{linealmente dependiente} (ld) si no es li.
+\end{itemize}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.D}
+\\Sea $\{v_1 \comma ... \comma v_r \} \subseteq V$ con $r \geq 2$. Entonces:
+\begin{enumerate}
+    \item $\{v_1 \comma ... \comma v_r \}$ es ld $\Leftrightarrows \exists v_i$ con $1 \leq i \leq r \tq v_i$ es combinación lineal del resto 
+    \item $\{v_1 \comma ... \comma v_r \}$ es li $\Leftrightarrows$ ningún $v_i$ es combinación lineal del resto
+\end{enumerate}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Corolario}
+\\Sea $G=\{v_1 \comma ... \comma v_r \}$ con $r \geq 2$. Entonces:
+\\ Existe $G_1 \subsetneq G$ tal que $gen(G)=gen(G_1) \Leftrightarrows$ G es ld
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Observaciones}
+\begin{enumerate}
+    \item $\{v_1 \comma ... \comma v_r\}$ es ld si algún $v_i = 0$
+    \item $\{v\}$ es li $\Leftrightarrows v \neq 0$
+    \item $Rg(A)=n \Rightarrows$ SCD $\Rightarrows$ es li
+\end{enumerate}
+}}
+
+\subsection{Base}
+\underline{Defnición}: V un $\cuerpo$-ev. $\{v_1 \comma ... v_n\} \subseteq V$.
+Decimos que \emph{B es base de V} si:
+\begin{enumerate}
+    \item $V = gen(B)$
+    \item B es li
+\end{enumerate}
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.E}
+\\Sea $G=\{v_1 \comma ... \comma v_r\}$ un conjunto generador de $S \neq \{0\}$.
+Entonces, \\ existe $B \subseteq G \tq B$ es base de $S$.
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.F}
+\\V un $\cuerpo$-ev. Sea $B=\{v_1 \comma ... \comma v_r\}$ base de V. Entonces,
+\begin{equation*}
+    \forall v \in V \comma \existsuniq \alpha_1 \comma ... \comma \alpha_r \in \cuerpo \tq v=\alpha_1*v_1+...+\alpha_r * v_r
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\centering \underline{Teorema 10.G}
+\\V un $\cuerpo$-ev. Sea $B=\{v_1 \comma ... \comma v_r\}$ base de V. Entonces,
+\begin{equation*}
+    \text{Si } \{w_1 \comma ... \comma w_n\} \subseteq V \lands n \gneq r \Rightarrows \{w_1 \comma ... \comma w_n\} \text{ es ld}
+\end{equation*}
+}}
+\\\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\makebox[\textwidth] {\underline{Teorema 10.H}}
+\\V un $\cuerpo$-ev.
+\begin{equation*}
+    B=\{v_1 \comma ... \comma v_r\} \text{ y } B'=\{v'_1\comma ... \comma v'_n\}  \text{ bases de V} \Rightarrows r=n
+\end{equation*}
+\underline{Observación}: Puede haber infinitas bases para un conjunto pero esas infinitas bases tienen la misma cantidad de elementos.
+}}
+\subsubsection*{Dimensión de una base}
+\underline{Definición}: V un $\cuerpo$-ev. Sea $B=\{v_1 \comma ... \comma v_r\}$ base de V.
+Se define la \emph{dimensión de V} igual a n.
+\underline{Notación}: $dim(V)=n$
+\\\\\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+{\makebox[\textwidth] {\underline{Teorema 10.I}}
+\\V un $\cuerpo$-ev. $dim(V)=n$.
+\\Son equivalentes:
+\begin{enumerate}
+    \item $gen\{v_1 \comma ... \comma v_n\} = V$
+    \item $\{v_1 \comma ... \comma v_n\} \subseteq V$
+    \item $\{v_1 \comma ... \comma v_n\}$ es li
+\end{enumerate}
+\underline{Nota}: Esto sirve para probar que un conjunto determinado es base de otro sin tener que buscar generadores.
+}}
+\pagebreak
+
+%-------------------------------------------%
+\addcontentsline{toc}{section}{Resumen de todas las propiedades}
+\section*{Resumen de todas las propiedades}
+\subsection*{1 Conjuntos}
+\begin{enumerate}
+    \item \emph{Leyes de De Morgan}
+    \begin{equation*}
+        \overline{A \cup B} \eq \overline{A} \cap \overline{B}
+    \end{equation*}
+    \begin{equation*}
+        \overline{A \cap B} \eq \overline{A} \cup \overline{B}
+    \end{equation*}
+    \item \emph{Leyes Distributivas}
+    \begin{equation*}
+        A \cap B (B \cup C) \eq (A \cap B) \cup (A \cap C)
+    \end{equation*}
+    \begin{equation*}
+        A \cup B (B \cap C) \eq (A \cup B) \cap (A \cup C)
+    \end{equation*}
+    \item \emph{Ley Conmutativa}
+    \begin{equation*}
+        A \cup B \eq B \cup A
+    \end{equation*}
+    \begin{equation*}
+        A \cap B \eq B \cap A
+    \end{equation*}
+    \item \emph{Ley Asociativa}
+    \begin{equation*}
+        (A \cup B) \cup C \eq A \cup (B \cup C)
+    \end{equation*}
+    \begin{equation*}
+        (A \cap B) \cap C \eq A \cap (B \cap C)
+    \end{equation*}
+    \item \emph{Otras}
+    \begin{equation*}
+        A \cup \varnothing \eq A
+    \end{equation*}
+    \begin{equation*}
+        A \cap \varnothing \eq \varnothing
+    \end{equation*}
+    \begin{equation*}
+        A \cup \mathcal{U} \eq \mathcal{U}
+    \end{equation*}
+    \begin{equation*}
+        A \cap \mathcal{U} \eq A
+    \end{equation*}
+    \begin{equation*}
+        \overline{\varnothing} \eq \mathcal{U}
+    \end{equation*}
+    \begin{equation*}
+        \overline{\mathcal{U}} \eq \varnothing
+    \end{equation*}
+\end{enumerate}
+
+\subsection*{5 Enteros}
+\subsubsection*{5.2 Divisibilidad en un anillo}
+\begin{enumerate}
+    \item $a \leq b \Rightarrows a + c \leq b + c$
+    \item $a \leq b \lands c \gneq 0 \Rightarrows ac \leq bc$ 
+    \item $ab \eq ac \lands a \neqs 0 \Rightarrows  b \eq c$
+    \item $ab \eq 0 \Rightarrows a = 0 \vees b = 0$
+    \item $a|b \Leftrightarrows |a|\,|\,|b|$
+    \item $a|b \lands b \neq 0 \Rightarrows |a| \leq |b|$
+    \item $a|b \lands b|a \Rightarrows |a| \eq |b|$
+    \item $a|b \lands a|c \Rightarrows a | b \pm c$ 
+    \item $a|b \lands a|b \pm c \Rightarrows a|c$
+    \item $a|b \Rightarrows a|bc$
+    \item $a|b \Rightarrows a^n | b^n$ con $n \in \mathbb{N}$
+    \item $a|b \lands a|c \Rightarrows a|\alpha b+\beta c$ con $\alpha, \beta \in \mathbb{Z}$
+\end{enumerate}
+\subsubsection*{5.3 Congruencias}
+\begin{enumerate}
+    \item $a_1 \equiv b_1 (m) \lands a_2 \equiv b_2 (m) \Rightarrows a_1 \pm a_2 \equiv b_1 \pm b_2 (m)$
+    \\ $a_1 \equiv b_1 (m) \lands a_2 \equiv b_2 (m) \Rightarrows a_1 * a_2 \equiv b_1 * b_2 (m)$
+    \item $a_1 \equiv b_1 (m) \lands ... \lands a_k \equiv b_k (m) \Rightarrows a_1 \pm ... \pm a_k \equiv b_1 \pm ... \pm b_k (m)$
+    \\ $a_1 \equiv b_1 (m) \lands ... \lands a_k \equiv b_k (m) \Rightarrows a_1 * ... * a_k \equiv b_1 * ... * b_k (m)$
+    \item $a \equiv b (m) \Rightarrows a^n \equiv b^n (m) \; \forall n \in \mathbb{N}$
+    \item $a \equiv b (m) \Rightarrows ac \equiv bc (m)$
+\end{enumerate}
+\subsubsection*{5.5 Números Coprimos}
+\begin{enumerate}
+    \item $a \bot b \lands a | bc \Rightarrows a |c$
+    \item $a \bot b \lands a \bot c \Rightarrows a \bot bc$
+    \item $a|c \lands b|c \lands a \bot c \Rightarrows ab|c$
+    \item $d = (a:b) \Rightarrows \frac{a}{d} \bot \frac{b}{d}$
+    \item $a \bot b \Rightarrows a^n \bot b^k$ con $n, k \in \naturales$
+    \item $a \bot c \Rightarrows (a:cb) \eq (a:b)$
+\end{enumerate}
+\subsubsection*{5.6.1 $V_p$}
+\begin{enumerate}
+    \item $V_p(a*b) \eq V_p(a) + V_p(b)$
+    \item $V_p(a^n) \eq nV_p(a)$
+    \item $d|a \Rightarrows V_p(d) \leq V_p(a)$
+    \item $V_p \geq 0$
+\end{enumerate}
+
+\subsection*{6 Polinomios}
+\subsubsection*{6.2 Divisivibilidad}
+\begin{enumerate}
+    \item $g\neq 0 \comma g|0$
+    \item $g | f \Leftrightarrows cg | f$ con $c \in \cuerpo - \{0\} = \cuerpo^*$
+    \item $g|f \Leftrightarrows \frac{g}{cp(g)} | \frac{f}{cp(f)}$ con $f\neq 0$
+    \item $g|f \Leftrightarrows g|cf$ con $c \in \cuerpo^*$
+    \item $f \comma g$ no nulos, $g|f \lands gr(g) \eq gr(f) \Rightarrows \exists c \in \cuerpo^* \tq f=cg$
+    \item $f|g \lands g|f \Rightarrows f \eq cg$ con $c \in \cuerpo^*$
+    \item $f \notin \cuerpo \comma c|f \lands cf|f$ si $c \in \cuerpo^*$. Es decir, f tiene como divisores cualquier constante y múltiplos de él mismo.
+\end{enumerate}
+\subsubsection*{6.3 MCD}
+\begin{enumerate}
+    \item $(f:0) \eq \frac{f}{cp(f)} \: \forall f \in \cuerpo_{[x]}$
+    \item $(f:g) \eq (g:r_g(f)) \: \forall g \in \cuerpo_{[x]}$, $g$ no nulo.
+\end{enumerate}
+\subsubsection*{6.5 Polinomios Coprimos}
+\begin{enumerate}
+    \item $g \bot h \comma g|f \lands h|f \Leftrightarrows gh|f$
+    \item $g \bot h \comma g|hf \Leftrightarrows g|f$
+\end{enumerate}
+\subsubsection*{6.6 Evaluación}
+\begin{enumerate}
+    \item $(f+g)_{(x)} = f_{(x)}+g_{(x)}$
+    \item $(f*g)_{(x)} = f_{(x)} * g_{(x)}$
+\end{enumerate}
+\subsubsection*{6.10 Multiplicidad de una raíz}
+\begin{enumerate}
+    \item a es raíz múltiple de $f \Leftrightarrows f(a)=0 \lands f'(a)=0$
+    \item a es raíz simple de $f \Leftrightarrows f(a)=0 \lands f'(a)\neq 0$
+\end{enumerate}
+
+\subsection*{7 Sumas - Recurrencias}
+\begin{enumerate}
+    \item \textbf{Ley distributiva}
+    \begin{equation*}
+        \sumatoria{k=i}{n} c.a_k \eq c \sumatoria{k=i}{n} a_k
+    \end{equation*}
+    \item \textbf{Ley Asociativa}
+    \begin{equation*}
+        \sumatoria{k=i}{n} (a_k + b_k) \eq \sumatoria{k=i}{n} a_k + \sumatoria{k=i}{n} b_k
+    \end{equation*}
+    \item \textbf{Ley Conmutativa}
+    \begin{equation*}
+        \sumatoria{k=i}{n} a_k \eq \sumatoria{k=i}{n} a_{p(k)}
+    \end{equation*}
+    siendo $p: I \rightarrow I$ una \emph{función biyectiva}, $I = {i,i+1,...,n}$
+    \item \textbf{Cambio de Índice}
+    \begin{equation*}
+        \sumatoria{k\in I}{} a_k \eq \sumatoria{j \in J}{} a_{g(j)}
+    \end{equation*}
+    siendo $g: J \rightarrow I"$ una \emph{función biyectiva}, y $J, I$ conjuntos finitos. 
+    \\Esta propiedad nos permite elegir si priorizamos la fórmula o el conjunto de índices.
+\end{enumerate}
+\subsubsection*{7.4.2 Relaciones de Orden 2}
+Sea $X_n+\alpha_1X_{n-1}+\alpha_2X_{n-2} = 0  \text{ con }\alpha_1 \in \complejos, \alpha_2 \in \complejos-\{0\}, n \geq 2$. 
+\\Entonces,
+\begin{enumerate}
+    \item $X_n = r^n$ es solución de la ecuación $\Leftrightarrows  \underbrace{r^2+\alpha_1 r + \alpha_2}_{\substack{\text{"Polinomio característico} \\ \text{de la relación de recurrencia"}}} = 0$
+    \item Si $Y_n$ y $Z_n$ son soluciones de la relación de recurrencia \\$\Rightarrows aY_n + bZ_n$ es solución $\forall a,b \in \complejos$
+    \item Si $r^2+\alpha_1 r + \alpha_2$ tiene 2 raíces distintas $r_1$ y $r_2$
+            \\$\Rightarrows$ la \emph{solución general} de la relación es $X_n = Ar_1^n + br_2^n$ con $A, B \in \complejos$
+    \item Si $r^2 + \alpha_1 r + \alpha_2$ tiene una raíz doble $r_1$
+            \\$\Rightarrows$ la \emph{solución general} de la relación $X_n=Ar_1^n+Bnr_1^n$ con $A,B \in \complejos$
+\end{enumerate}
+\subsubsection*{9.1 Operaciones entre matrices}
+Sean $A,B,C$ matrices, $\alpha,\beta \in \cuerpo$. Entonces,
+\begin{enumerate}
+    \item $A+B\eq B+A$
+    \item El producto entre matrices \emph{NO siempre es conmutativo}.
+    \item $A+(B+C) = (A+B)+C$
+    \item $A + 0 = A$
+    \item Para cada $A \in \cuerpo^{n \times m} \comma \exists (-A) \in \cuerpo^{n \times m} \tq A+(-A)=0$
+    \item $A*(B*C)=(A*B)*C$
+    \item $A*I = A \comma I*A=A$
+    \item $A*0=0 \comma 0*A=0$
+    \item $A*(B+C) = A*B + A*C$ y $(B+C)*A = B*A + B*C$
+    \item $\alpha*(A+B)=\alpha*A + \alpha *B$
+    \item $\alpha * (A*B) = (\alpha*A)*B$
+    \item $(\alpha + \beta) * A = \alpha * A + \beta * A$
+    \item $\alpha * A = A * \alpha$
+    \item $(-1)*A=-A$
+    \item $(\alpha*A)^t = \alpha * A^t$
+    \item $ (A+B)^t=A^t+B^t$
+    \item $(A*B)^t = B^t * A^t$
+    \item $(A^k)^t = (A^t)^k \; \forall k \in \naturales$
+\end{enumerate}
+
+\subsection*{10 Espacios Vectoriales}
+\textbf{Propiedades de los espacios vectoriales}
+\begin{enumerate}
+    \item El neutro para la suma \emph{es único}.
+    \item $0 * v = 0_v$ con $0,0_v \in \cuerpo$
+    \item $\alpha * 0_v = 0_v$
+    \item $\alpha * v = 0 \Rightarrows \alpha = 0 \vees v = 0_v$
+    \item El opuesto de un vector \emph{es único}.
+    \item $(-1) * v  = -v$ con $(-1) \in \cuerpo \comma v,-v \in V$
+    \item $\alpha * \sumatoria{i=1}{r} v_i = \sumatoria{i=1}{r} \alpha * v_i$ con $\alpha \in \cuerpo \comma v_i \in V$
+\end{enumerate}
+\end{document}

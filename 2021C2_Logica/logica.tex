@@ -1,0 +1,1571 @@
+\documentclass{article}
+% Para poder escribir las tildes directamente
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{cancel}
+\usepackage{color,soul}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{outlines}
+\usepackage{subcaption}
+\usepackage[shortlabels]{enumitem}
+
+
+\newcommand{\lands}{\:\land\:}                          % "logical and with spaces". Pone el "y" dejando espacio(mediano) a los costados
+\newcommand{\comma}{,\,}                                % Pone la coma seguida de un espacio(chiquito)
+\newcommand{\tq}{/\,}                                   % "tal que". Pone la barrita del "tal que" seguida de un espacio
+\newcommand{\vees}{\:\vee\:}                            % "vee with spaces". Pone el "ó" con espacio a los costados
+\newcommand{\eq}{\:=\:}                                 % Pone el igual con espacios(medianos) a los costados
+\newcommand{\neqs}{\:\neq\:}                            % Pone el desigual con espacios(medianos) a los costados
+
+\newcommand{\enteros}{\mathbb{Z}}                       % Pone la Z de los números enteros
+\newcommand{\naturales}{\mathbb{N}}                     % Pone la N de los números naturales
+\newcommand{\racionales}{\mathbb{Q}}                    % Pone la Q de los números racionales
+\newcommand{\complejos}{\mathbb{C}}                     % Pone la C de los números complejos
+\newcommand{\cuerpo}{\mathbb{K}}                        % Pone la K para denotar un cuerpo (los cuerpos son R,Q o C)
+\newcommand{\reales}{\mathbb{R}}                        % Pone la R de los números reales
+
+\newcommand{\partes}{\mathcal{P}}
+\newcommand{\familia}{\mathcal{F}}                      % Pone la F de familia de subconjuntos
+\newcommand{\relates}{\mathcal{R}}                      % Pone la R para denotar cuando un elemento se realciona con otro
+\newcommand{\ctes}{\mathcal{C}}
+\newcommand{\lenguaje}{\mathcal{L}}
+\newcommand{\interpretacion}{\mathcal{I}}
+\newcommand{\universo}{\mathcal{U}}
+
+\newcommand{\vabs}[1]{\left\lvert #1 \right\rvert }     % Pone el módulo y recibe como argumento el número
+\newcommand{\Rightarrows}{\: \Rightarrow \:}            % Pone la flecha del "entonces" con espacios(medianos) a los costados
+\newcommand{\Leftrightarrows}{\: \Leftrightarrow \:}    % Pone la flecha del "si y solo si" con espacios(medianos)
+\newcommand{\existsuniq}{\exists !\,}                   % Pone el "existe un único" dejando un espacio(chiquito) para que no quede tan amontonado
+\newcommand{\bld}[1]{\textbf{#1}}
+\newcommand{\sumatoria}[2]{\sum_{#1} ^{#2}}
+
+% Comandos para computabilidad
+\newcommand{\msaltoinc}[2]{IF \text{ } #1 \neq 0 \text{ } GOTO \text{ } #2}
+\newcommand{\tsaltoinc}[2]{$IF$ $#1 \neq 0$ $GOTO$ $#2$ }
+\newcommand{\ms}{\text{ }}
+
+
+
+\title{Resumen - Lógica Computacional}
+\author{Nicolás Margenat}
+\date{2Q 2021/1Q 2022}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Cardinalidad}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Conjunto Coordinable}
+$A$ es \emph{coordinable} con $B$ si $\exists f: A \rightarrow B$ biyectiva.
+\newline\underline{Notación}: $A \sim B$
+\newline\underline{Observación}: $A \relates B$ si $A \sim B$ es una relación de equivalencia.
+
+\subsubsection*{Definición 2. Sección Inicial}
+$I_n = \{ 1,2, ... , n \}$ con $n \in \naturales_{\geq 1}$
+\newline \underline{Ejemplos}: $I_1 = \{ 1 \}$, $I_2 = \{ 1,2 \}$
+\newline \underline{Observación}: $I_n \sim I_m \Leftrightarrows n = m$
+
+\subsubsection*{Definición 3. Conjuntos finitos e infinitos}
+$A$ es \emph{finito} si $A = \varnothing$ o $\exists k \in \naturales_{\geq 1} \tq A \sim I_k$
+\newline Un conjunto es \emph{infinito} si no es finito
+\newline \underline{Observación}: $\naturales$ es infinito
+
+\subsubsection*{Definición 4. Cardinales}
+Card($\naturales$) = $\chi_0$ ("aleph cero")
+\newline Card($I_k$) = $K$ (K = k)
+\newline Card($\varnothing$) = $0$
+\newline Card($[0,1]$) = $c$ ($> \chi_0$) 
+\newline Card($\pares(\naturales)) = c$
+\newline Card($\partes_{finitas}(\naturales)) = \chi_0$
+\newline Card($\partes_{infinitas}(\naturales)) = c$
+\\\\\textbf{Álgebra de Cardinales importantes}
+\begin{enumerate}
+    \item $n + \chi_0 = \chi_0$ con $n \in \naturales$
+    \item $\chi_0 + \chi_0 = \chi_0$
+    \item $\sumatoria{i=1}{n} \chi_0 = \chi_0$ con $n \in \naturales_{>0}$
+    \item $c + \chi_0 = c$
+    \item $\chi_0 \centerdot \chi_0 = \chi_0$
+    \item $2^{\chi_0} = c$
+    \item $c \centerdot c = c$
+    \item $\chi_0 \centerdot c = c$
+    \item $c^n = c$ con $n \in \naturales_{>0}$
+    \item $c^{\chi_0} = c$
+    \item $c^c = 2^c$
+\end{enumerate}
+
+\subsubsection*{Definición 5. Comparación de cardinales}
+$A$ y $B$ conjuntos. $\#A = m,  \#B = K$
+\begin{enumerate}
+    \item Decimos que $m \leq K$ si $\exists f: A \rightarrow B$ inyectiva
+    \item Decimos que $m \geq K$ si $\exists f: A \rightarrow B$ sobreyectiva
+    \item Decimos que $m = K$ si $\exists f: A \rightarrow B$ biyectiva
+    \item Decimos que $m < K$ si $m \leq K$ y $m \neq K$
+    \item Decimos que $m > k$ si $m \geq K$ y $m \neq K$
+\end{enumerate}
+\underline{Observación}: $\leq$ y $\geq$ son relaciones de orden (R A T).
+
+\subsubsection*{Definición 6. Conjunto numerable}
+$A$ es numerable si $A$ es finito o $A \sim \naturales$
+
+\subsubsection*{Definición 7. Sucesiones}
+Una funcion $f: \naturales \rightarrow A $ es una sucesión de elementos de $A$:
+\begin{equation*}
+    \underbrace{f(0)}_{a_0}\comma \underbrace{f(1)}_{a_1}\comma \underbrace{f(2)}_{a_2}\comma \underbrace{f(4)}_{a_4}\comma ... 
+\end{equation*}
+\underline{Notación}: $(a_n)$ con $n \in \naturales$
+
+\subsubsection*{Definición 8. Álgebra de Cardinales}
+Sean $a=Card(X)\comma b=Card(Y)$ y $X \cap Y = \varnothing$.
+\\Definimos:
+\begin{enumerate}
+    \item $a + b = \#(X \cup Y)$
+    \item $a * b = \#(X \times Y)$
+    \item $b^a = \#\{f: X \rightarrow Y \tq \text{f es funcion}\}$
+\end{enumerate}
+\leavevmode\\Algunas \textbf{propiedades}:
+\begin{enumerate}
+    \item $(x^y)^z = x^{y*z}$
+    \item Si $y \leq z$, entonces:
+    \begin{align*}
+        &x^y \leq x^z \\
+        &y^x \leq z^x \\
+        &x \centerdot y \leq x \centerdot z
+    \end{align*}
+    \item $x^y \centerdot x^z = x^{y+z}$
+\end{enumerate}
+
+\subsection{Propiedades/Observaciones}
+\begin{enumerate}
+    \item $m \leq K \Leftrightarrows K \geq m$ con $m, K$ cardinales.
+    \item Cualquier subconjunto de una sección inicial es finito.
+    \item $A \subseteq B$ y $A$ es infinito $\Rightarrows B$ es infinito.
+    \item $X$ infinito $\Rightarrows \exists f: \naturales \rightarrow X$ es inyectiva.
+    \item $A$ numerable y $A \neq \varnothing \Rightarrows \exists f: \naturales \rightarrow A$ es sobreyectiva.
+    \item $\exists f: \naturales \rightarrow A$ es sobreyectiva $\Rightarrows A$ es numerable.
+    \item Si $A \subseteq B \Rightarrows \#A \leq \#B$
+    \item $(\naturales^k \times \naturales) \sim \naturales$
+    \item $[0,1] = \{x \in \reales \tq 0 \leq x \leq 1 \}$ es infinito no numerable. 
+    \item $X$ es infinito no numerable, $A$ numerable $\Rightarrows X \cup A \sim X$
+    \item $X$ infinito no numerable, $A$ numerable $\Rightarrows X - A \sim X$
+    \item $A,B$ conjuntos numerables $\Rightarrows A \cup B$ es numerable.
+    \item $(A_n)_{n \in \naturales}$ una familia de conjuntos numerables $\Rightarrows \bigcup_{n \in \naturales} A_n$ es numerable.
+    \item $A$ conjunto finito no vacío y $S = \bigcup_{m \in \naturales_{>0}} A^m \Rightarrows \#S = \chi_0$
+    \item Sea $A \neq \varnothing$ un conjunto. Entonces:
+    \begin{equation*}
+        A \text{ es infinito } \Leftrightarrows \forall x \in A \comma \exists f_x: A \rightarrow A - \{x\} 
+        \text{ es biyectiva }
+    \end{equation*}
+    
+    \item $\#\partes(X) = 2^{\#X}$
+\end{enumerate}
+
+\subsection{Teoremas}
+\subsubsection{Teorema de Bernstein}
+\textbf{Versión 1}
+$\#A = m$, $\#B = K$
+\begin{equation*}
+    m \leq K \text{ y } m \geq K \Rightarrows m = K
+\end{equation*}
+Necesito demostrar inyectividad y sobreyectividad.
+\\\\
+\textbf{Versión 2}
+\newline Utilizando la Propiedad 1.
+\newline $\#A = m$, $\#B = K$
+\begin{equation*}
+    m \leq K \text{ y } K \leq m \Rightarrows m = K
+\end{equation*}
+Osea lo puedo demostrar probando inyectividad en ambos casos.
+
+\subsubsection{Teorema de Cantor}
+\begin{equation*}
+    \#X < \#\partes(X)
+\end{equation*}
+
+\subsubsection{Hipótesis del Continuo}
+\textbf{DISCLAIMER}: Esto en realidad no es un teorema, en el sentido de que no se pudo probar la veracidad del mismo, pero tampoco se pudo probar que es falso. Por ende, toda la comunidad científica/matemática se puso de acuerdo en decir que es verdad en el mientras tanto porque no rompe nada.
+\\\\Dicho esto, la hipótesis dice lo siguiente:
+
+\begin{equation*}
+    \nexists X \text{ conjunto } \tq \chi_0 < \#X < C
+\end{equation*} 
+
+%--------------------------------------------------------------------%
+%--------------------------------------------------------------------%
+\newpage
+\section{Lógica Proposicional - Lenguajes}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Alfabeto}
+$A$ conjunto, $A \neq \varnothing$, se llama \emph{alfabeto}.
+
+\subsubsection*{Definición 2. Expresión}
+Una expresión es una sucesión finita de elementos de $A$ o la cadena vacía a la que llamamos $\lambda$.
+
+\subsubsection*{Definición 3. Longitud de una Expresión}
+Sea $E = e_0\comma e_1 \comma ...\comma e_{n-1}$ una expresión de elementos de $A$, $long(E)=n$ y $long(\lambda)=0$.
+
+\subsubsection*{Definición 4. Conjunto $A^*$}
+\begin{equation*}
+    A^* = \bigcup_{k \in \naturales} A_k
+\end{equation*}
+donde $A_k = \{e$ expresión en $A \tq long(e) = k \}$ y $A$ es un alfabeto.
+\\Por ejemplo, $A_0 = \{ \lambda \}$, $A_1 = A$, etc.
+
+\subsubsection*{Definición 5. Lenguaje}
+$A$ alfabeto, un lenguaje $\Sigma \neq \varnothing$ sobre $A$ es $\Sigma \subseteq A^*$
+
+\subsubsection*{Definición 6. Igualdad de expresiones}
+Sean:
+\begin{align*}
+    &E = e_0\comma e_1 \comma ...\comma e_{n-1} \\
+    &F = f_0\comma f_1 \comma ...\comma f_j
+\end{align*}
+entonces $E = F$ si $j = n-1$ y $e_i = f_i$ con $0 \leq i \leq n-1 $
+
+\subsubsection*{Definición 7. Concatenación}
+\begin{align*}
+    &E = e_0\comma e_1 \comma ...\comma e_{n-1} \in A^*\\
+    &F = f_0\comma f_1 \comma ...\comma f_{k-1} \in A^*
+\end{align*}
+Definimos la concatenación como:
+\begin{equation*}
+	EF = e_0 \comma ... \comma e_{n-1} \comma f_0 \comma ... \comma f_{k-1}
+\end{equation*}
+\underline{Observaciones}:
+\begin{enumerate}
+	\item $long(EF) = long(E) + long(F) = n + k$
+	\item $E\lambda = \lambda E = E$
+	\item $\lambda \lambda = \lambda$
+	\item $FE \neq EF$ si $E \neq F$
+\end{enumerate}
+
+
+\subsection{Proposiciones}
+\begin{enumerate}
+	\item $A$ alfabeto, $E\comma F \comma G \comma H \in A^*$, $EF = GH$ y $long(E) \geq long(G)$ 
+	\begin{equation*}
+	    \Rightarrows \exists H \in A^* \tq E = GH'
+	\end{equation*}
+		
+	\item $A$ alfabeto, $E\comma F \comma G \comma H \in A^* \tq EF = GH$ y $long(E) = long(G)$
+	\begin{equation*}
+		\Rightarrows E = G \text{ y } F = H
+	\end{equation*}
+\end{enumerate}
+
+%-------------------------------------------------------------------------%
+\newpage
+\section{Lógica Proposicional - Semántica}
+\subsection{Definciones Previas}
+\subsubsection*{Definición 1. Valuación}
+Una valuación es una función:
+\begin{equation*}
+    v : FORM \rightarrow \{0,1\} \text{ que verifica:}
+\end{equation*}
+\begin{enumerate}
+    \item $v(\neg \alpha) = 1 - v(\alpha)$
+    \item $v(\alpha_1 \wedge \alpha_2) = min\{v(\alpha_1), v(\alpha_2)\}$
+    \item $v(\alpha_1 \vee \alpha_2) = max\{v(\alpha_1), v(\alpha_2)\}$
+    \item $v(\alpha_1 \rightarrow \alpha_2) = max\{1 - v(\alpha_1), v(\alpha_2)\}$
+\end{enumerate}
+
+\subsubsection*{Definición 2. Clasificación Semántica de las fórmulas}
+Sea $\alpha \in F$. Entonces:
+\begin{enumerate}
+    \item $\alpha$ es \textbf{TAUTOLOGÍA} si $v(\alpha) = 1 \, \forall v$ val.
+    \item $\alpha$ es \textbf{CONTRADICCIÓN} si $v(\alpha) = 0 \, \forall v$ val.
+    \item $\alpha$ es \textbf{CONTINGENCIA} si $\exists v \text{ val } \tq v(\alpha) = 1$ y $\exists w \text{ val } \tq w(\alpha) = 0$
+\end{enumerate}
+
+\subsubsection*{Definición 3. Equivalencia de fórmulas}
+Sean $\alpha \comma \beta \in F$. 
+\\Decimos que \emph{$\alpha$ es equivalente a $\beta$} si $v(\alpha) = v(\beta) \forall v$ val.
+\\\underline{Notación}: $\alpha \equiv \beta$
+\\\underline{Observación}: $\relates \in F \tq \alpha \relates \beta$ si $\alpha \equiv \beta$. Entonces, $\relates$ es de \emph{equivalencia}.
+\\\\Algunas fórmulas que son equivalentes entre sí son:
+\begin{enumerate}
+    \item $\neg (\alpha \wedge \beta) \equiv (\neg \alpha \vee \neg \beta)$
+    \item $\neg (\alpha \vee \beta) \equiv (\neg \alpha \wedge \neg \beta)$
+    \item $(\alpha \wedge (\beta \vee \gamma)) \equiv ((\alpha \wedge \beta) \vee (\alpha \wedge \gamma))$
+    \item $(\alpha \vee (\beta \wedge \gamma)) \equiv ((\alpha \vee \beta) \wedge (\alpha \vee \gamma))$
+\end{enumerate}
+
+\subsubsection*{Definición 4. Función booleana}
+Una función $f: \{0,1\}^n \rightarrow \{0,1\}$ con $n \in \naturales_{\geq 1}$ se llama \emph{función booleana}.
+
+\subsubsection*{Definición 5. Conectivos Adecuados}
+Sea $C$ un conjunto de conectivos; y sean $F_C = \{ \text{ formulas que tienen conectivos de C } \} \bigcup VAR$. Entonces:
+\begin{equation*}
+    C \text{ \emph{es adecuado } si } \forall \alpha \in FORM \comma \exists \beta \in F_C \tq \beta \equiv \alpha
+\end{equation*}
+
+
+\subsection{Proposiciones}
+\begin{enumerate}
+    \item Sea $\alpha \in F \comma (p_1 \rightarrow \alpha)$ es tautologia. Entonces,
+    \begin{equation*}
+        p_1 \notin VAR(\alpha) \Rightarrows \alpha \text{ es tautología}
+    \end{equation*}
+\end{enumerate}
+
+
+\subsection{Teoremas}
+\subsubsection{Teorema 3.A}
+Dada $f: VAR \rightarrow \{0,1\}$ función. Entonces:
+\begin{equation*}
+    \existsuniq v \text{ valuación}: FORM \rightarrow \{0,1\} \tq v \text{ extiende a $f$}
+\end{equation*}
+Es decir, $v|_{VAR} = f$
+
+\subsubsection{Teorema 3.B}
+Sea $\alpha \in F$. $Var(\alpha) = \{ p_j \in Var \tq p_j \text{ aparece en } \alpha \}$.
+\\$v \comma w$ son valuaciones tales que $v|_{VAR(\alpha)} = w|_{VAR(\alpha)}$
+\begin{equation*}
+    \Rightarrows v(\alpha) = w(\alpha)
+\end{equation*}
+\subsubsection{Teorema 3.C}
+\begin{equation*}
+    \{f \tq f \text{ es función booleana}\} \rightarrow FORM/\equiv
+\end{equation*}
+es biyectiva.
+
+%-------------------------------------------------------------------------%
+\newpage
+\section{Lógica Proposicional - Parte 1}
+El alfabeto de la Lógica Proposicional es el que sigue:
+\begin{equation*}
+	A = VAR \cup \{ ( \comma ) \} \cup \{ \wedge \comma \vee \comma \rightarrow \}
+\end{equation*}
+donde $VAR = \{ P_n \tq n \in \naturales \} $
+
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Fórmula}
+\begin{enumerate}
+	\item $VAR \subseteq FORM = F$
+	\item $\alpha \in F \Rightarrows \neg \alpha \in F$
+	\item $\alpha \comma \beta \in F \Rightarrows (\alpha \vee \beta) \comma (\alpha \wedge \beta) 
+		\comma (\alpha \rightarrow \beta)$
+	\item $\alpha \in E^*$ es fórmula si se obtiene aplicando finitas veces 1, 2 y 3.
+\end{enumerate}
+De esta manera, \emph{las fórmula son el lenguaje de la logica proposicional}.
+
+\subsubsection*{Definición 2. Cadena de Formación(c.f)}
+Una sucesion finita $X_1 X_2 ... X_n = \alpha \in F$ de expresiones de $A^*$ es una c.f si:
+\begin{enumerate}
+	\item $X_i \in VAR$
+	\item $\exists j < i \tq X_i = \neg X_j$
+	\item $\exists j \comma k < i \tq X_i = (X_k \star X_j)$ donde $\star \in 
+		\{ \wedge \comma \vee \comma \rightarrow \}$
+\end{enumerate}
+con $1 \leq i \comma j \comma k \leq n$.
+\\Además, cada $X_i$ se llama \emph{eslabón}.
+
+\subsubsection*{Definición 3. Subcadena}
+Dada $X_1 ... X_n = \alpha$ c.f, decimos que $X_{i_1} X_{i_2} ...X_{i_k}$
+es una subcadena si:
+\begin{enumerate}
+	\item Si es c.f
+	\item $X_{i_k} = X_n = \alpha$
+	\item $1 \leq i_1 < i_2 < ... < i_k = n$
+\end{enumerate}
+\underline{Observación}: Se define $\relates$ en el conjunto de c.f de forma tal que $A \relates B$ 
+si $A$ es subcadena de $B$. Entonces, $\relates$ es de \textbf{orden}.
+
+\subsubsection*{Definición 4. C.F Minimal}
+Una c.f es \emph{minimal} si la única subcadena que tiene es ella misma.
+
+\subsubsection*{Definición 5. Complejidad}
+Sea $E \in A^*$. Se define la complejidad de $E$ como la cantidad de conectivos que aparecen en $E$.
+\\\underline{Notación}: $C(E)$
+
+\subsubsection*{Definición 6. Complejidad binaria}
+Sea $E \in A^*$. Se define la complejidad binaria de $E$ como la cantidad de conectivos binarios 
+que aparecen en $E$.
+\\\underline{Notación}: $Cb(E)$
+
+\subsubsection*{Definición 7. Peso}
+Sea $E \in A^*$. Se define el peso de $E$ como la cantidad de paréntesis que abren menos la cantidad de paréntesis que cierran.
+\\\underline{Notación}: $p(E)$
+
+
+\subsubsection*{Definición 8. Subfórmula}
+Sea $\alpha \in F$.
+\\Si $C(\alpha) = 0 \Rightarrows \alpha = p_j$
+\begin{equation*}
+	S(\alpha) = \{p_j\}
+\end{equation*}
+
+\leavevmode\\Si $C(\alpha) > 0$. Entonces:
+\begin{enumerate}
+	\item $\alpha = \neg \beta$
+		\begin{equation*}
+			S(\alpha) = \{\alpha\} \wedge S(\beta)
+		\end{equation*}
+	\item $\alpha = (\beta_1 \star \beta_2)$
+		\begin{equation*}
+			S(\alpha) = \{\alpha\} \wedge S(\beta_1) \wedge S(\beta_2)
+		\end{equation*}
+\end{enumerate}
+
+
+\subsection{Proposiciones}
+\begin{enumerate}
+	\item $X_1 \comma ... \comma X_n$ es una c.f $\Rightarrows X_1 \comma ... \comma X_j$ es una c.f
+		con $j < i$
+	\item $C(\alpha) = 0 \Rightarrows \alpha \in VAR$
+	\item $C(\alpha) > 0 \Rightarrows \alpha = \neg \beta$ con $\beta \in F$
+	\item $C(\alpha) > 0 \Rightarrows \alpha = \beta_1 \star \beta_2$ con $\beta_1 \comma \beta_2 \in F \comma \star \in \{ \vee \comma \wedge \comma \rightarrow \}$
+\end{enumerate}
+
+\subsection{Teoremas}
+\subsubsection{Teorema 4.A}
+\begin{equation*}
+	\alpha \in FORM \Leftrightarrows \exists X_1 \comma ... \comma X_n = \alpha 
+	\text{ es c.f }
+\end{equation*}
+
+\subsubsection{Teorema 4.B}
+Sea $\alpha \in F$. Entonces:
+\begin{enumerate}
+	\item $p(\alpha) = 0$
+	\item Si $\bullet$ es un conectivo binario que aparece en $\alpha 
+		\Rightarrows$ la expresión $E$ a la izquierda de $\bullet$ en $\alpha$ verifica que
+		$p(E) > 0$
+\end{enumerate}
+
+\subsubsection{Teorema 4.C}
+\begin{equation*}
+    \#S(\alpha) \leq long(\text{cf de } \alpha)
+\end{equation*}
+
+\subsubsection{Unicidad de escritura}
+Sea $\alpha \in F \comma c(\alpha) > 0$. Entonces:
+\begin{enumerate}
+	\item $\existsuniq \beta \in F \tq \alpha = \neg \beta$ ó
+	\item Existen únicos $\beta_1 \comma \beta_2 \in F \comma \star \in \{ \vee \comma \wedge \comma 
+		\rightarrow \} \tq \alpha = ( \beta_1 \star \beta_2 )$
+\end{enumerate}
+
+%-------------------------------------------------------------------------%
+\newpage
+\section{Lógica Proposicional - Parte 2}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Satisfacible}
+\begin{enumerate}
+    \item Sea $\alpha \in F \comma v$ val. Decimos que $v$ \emph{satisface} $\alpha$ si $v(\alpha) = 1$
+    \item Sea $\alpha \in F$. Decimos que $\alpha$ es satisfacible si $\exists v \text{ val} \tq v(\alpha) = 1$
+\end{enumerate}
+
+\subsubsection*{Definición 2. Consecuencia}
+Sea $\Gamma \subseteq F \comma \alpha \in F$.
+\\Decimos que $\alpha$ es consecuencia de $\Gamma$ si:
+\begin{equation*}
+    ( v(\Gamma) = 1 \Rightarrows v(\alpha) = 1 ) \: \forall v \text{ val}
+\end{equation*}
+o lo que es lo mismo:
+\begin{equation*}
+    \alpha \notin C(\Gamma) \text{ si } \exists v \text{ val} \tq v(\Gamma) = 1 \text{ y } v(\alpha) = 0
+\end{equation*}
+
+\subsubsection*{Definición 3. Conjunto de Fórmulas Independiente}
+$\Gamma$ es un conjunto de fórmulas independiente si:
+\begin{equation*}
+    \forall \alpha \in \Gamma \text{ se tiene que } \alpha \notin C(\Gamma - \{\alpha\})
+\end{equation*}
+
+\subsubsection*{Definición 4. Base}
+Sea $\Gamma$ un conjunto. 
+Decimos que \emph{$\Gamma$ es base} si:
+\begin{enumerate}
+    \item $\Gamma$ es independiente
+    \item $\Gamma$ es maximal respecto a la independencia. Es decir:
+    \begin{equation*}
+        \Sigma \text{ conjunto independiente y } \Gamma \subseteq \Sigma \Rightarrows \Gamma = \Sigma
+    \end{equation*}
+\end{enumerate}
+
+\subsubsection*{Definición 5. Conjunto Finitamente Satisfacible}
+Sea $\Gamma$ un conjunto.
+\\Decimos que \emph{$\Gamma$ es finitamente satisfacible} si todo subconjunto finito de $\Gamma$ es satisfacible.
+\\\\\underline{Notación}: f.s
+
+\subsubsection*{Definición 6. Literal}
+Se llama \emph{literal} a las variables o a las variables negadas.
+
+\subsection{Proposiciones}
+Sean $\Gamma_1 \comma \Gamma_2 \subset F$
+\begin{enumerate}
+    \item $\Gamma \subset C(\Gamma)$
+    \item $C(C(\Gamma)) = C(\Gamma)$
+    \item $C(F) = F$
+    \item $\Gamma_1 \subset \Gamma_2 \Rightarrows C(\Gamma_1) \subset C(\Gamma_2)$
+    \item $C(\Gamma_1) \cup C(\Gamma_2) \subset C(\Gamma_1 \cup \Gamma_2)$
+    \item $C(\Gamma_1 \cap \Gamma_2) \subset C(\Gamma_1) \cap C(\Gamma_2)$
+    \item Si $C(\Gamma_1) = \Gamma_2$ y $C(\Gamma_2) = \Gamma_1 \Rightarrows \Gamma_1 = \Gamma_2$
+    \item $C(\Gamma_1 \cup \Gamma_2) \subset C(\Gamma_1) \cup C(\Gamma_2) \Leftrightarrows \Gamma_1 \subset C(\Gamma2)$ ó $\Gamma_2 \subset C(\Gamma_1)$ 
+    \item $C(\Gamma_1~\cap~\Gamma_2)~=~C(\Gamma_1)~\cap~C(\Gamma_2)~\Leftrightarrows~ \alpha~\in~C(\Gamma_1)$ y $\beta~\in~C(\Gamma_2)~\rightarrow~ (\alpha~\vee~\beta)~\in~C(\Gamma_1~\cap~\Gamma_2)$
+    \item $\Gamma' \subseteq \Gamma$ y $\Gamma$ satisfacible $\Rightarrows \Gamma'$ satisfacible
+\end{enumerate}
+
+
+\subsection{Teoremas}
+\subsubsection{Teorema 5.A}
+Sea $\Gamma \subseteq F \comma \alpha \in F$. Entonces:
+\begin{equation*}
+    \alpha \in C(\Gamma) \Leftrightarrows \Gamma \cup \{\neg \alpha\} \text{ es insatisfacible}
+\end{equation*}
+
+\subsubsection{Teorema 5.B}
+Sea $\Gamma = \{ \gamma_1 \comma ... \comma \gamma_n \} \subseteq F, \alpha \in F$. Entonces:
+\begin{equation*}
+    \alpha \in C(\Gamma) \Leftrightarrows ((\gamma_1 \comma ... \comma \gamma_n) \rightarrow \alpha) \text{ es tautología}
+\end{equation*}
+
+\subsubsection{Teorema de la Deducción (Versión Semántica)}
+Sea $\Gamma \subseteq F \comma \alpha \comma \beta \in F$. Entonces:
+\begin{equation*}
+    (\alpha \rightarrow \beta) \in C(\Gamma) \Leftrightarrows \beta \in C(\Gamma \cup \{\alpha\})
+\end{equation*}
+
+\subsubsection{Lema}
+Sea $\Gamma$ f.s., $p_i \in VAR$. Entonces: 
+\begin{equation*}
+    \Gamma \cup \{p_i\} \text{ es f.s. ó } \Gamma \cup \{\neg p_i\} \text{ es f.s.} 
+\end{equation*}
+
+\subsubsection{Teorema de Compacidad}
+\begin{equation*}
+    \Gamma \text{ es satisfacible} \Leftrightarrows \Gamma \text{ es f.s.}
+\end{equation*}
+
+\subsubsection{Equivalencia T. Compacidad}
+Son equivalentes:
+\begin{enumerate}
+    \item $\Gamma \text{ es satisfacible} \Leftrightarrows \Gamma \text{ es f.s.}$
+    \item $\Gamma \text{ es insatisfacible} \Leftrightarrows \exists \Gamma_0 \subseteq \Gamma \text{ finito insatisfacible}$
+    \item $\alpha \in C(\Gamma) \Rightarrows \exists \Gamma' \subseteq \Gamma \comma \Gamma' \text{ finito} \tq \alpha \in C(\Gamma')$
+\end{enumerate}
+
+
+%-------------------------------------------------------------%
+\newpage
+\section{Lógica Proposicional - Teoría Axiomática}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Teoría Axiomática}
+Una "Teoría Axiomática" es un conjunto es axiomas unido a un conjunto de reglas.
+\\De esta manera, se definen los siguientes axiomas:
+\\Sean $\alpha \comma \beta \comma \gamma \in F$
+\begin{align*}
+    \text{AX 1: }&  (\alpha \rightarrow (\beta \rightarrow \alpha)) \\
+    \text{AX 2: }& ((\alpha \rightarrow (\beta \rightarrow \gamma)) \rightarrow ((\alpha \rightarrow \beta) \rightarrow (\alpha \rightarrow \gamma))) \\
+    \text{AX 3: }& ((\neg \alpha \rightarrow \neg \beta) \rightarrow ((\neg \alpha \rightarrow \beta) \rightarrow \alpha))
+\end{align*}
+\underline{Observación}: Los axiomas son tautologías.
+
+\subsubsection*{Definición 2. Regla MODUS PONENS (MP)}
+\begin{align*}
+    &(\alpha \rightarrow \beta) \\
+    &\alpha \\
+    &---- \\
+    &\beta
+\end{align*}
+
+\subsubsection*{Definición 3. Sistema Axiomático}
+Está formado por AX1, AX2, AX3 y la regla MP.
+
+\subsubsection*{Definición 4. Prueba}
+Sea $\alpha \in F$.
+\\Una prueba para $\alpha$ es una sucesión finita de fórmulas $\alpha_1 \comma \alpha_2 \comma ... \comma \alpha_k \tq$
+\begin{enumerate}
+    \item $\alpha_k = \alpha$
+    \item $\alpha_j$ es un axioma ó se obtiene aplicando MP a $\alpha_i$ y $\alpha_t$ con $i \comma t < j$. O lo que es lo mismo:
+    \begin{equation*}
+        \alpha_t = (\alpha_i \rightarrow \alpha_j) \text{ con } 1 \leq j \leq k
+    \end{equation*}
+\end{enumerate}
+
+\subsubsection*{Definición 5. Demostrable}
+Sea $\alpha \in F$.
+\\Decimos que $\alpha$ es \emph{demostrable} si existe una prueba de $\alpha$. En este caso $\alpha$ se llama \emph{teorema}.
+
+\subsubsection*{Definición 6. Deducible}
+Sea $\Gamma \subseteq F \comma \alpha \in F$.
+\\Decimos que \emph{$\alpha$ se deduce de $\Gamma$} si existe una sucesión finita de fórmulas  $\alpha_1\comma \alpha_2 \comma ... \comma \alpha_n =~\alpha$ que verifica que:
+\begin{align*}
+    &\alpha_i \in \Gamma \text{ ó}\\
+    &\alpha_i \text{ es un axioma ó}\\
+    &\alpha_i \text{ se obtiene aplicando MP a } \alpha_j = (\alpha_k \rightarrow \alpha_i) \text{ y } \alpha_k \text{ con } j \comma k < i
+\end{align*}
+\underline{Notación}: $\Gamma \vdash \alpha$
+
+\subsubsection*{Definición 7. Consistente}
+Sea $\Gamma \subseteq F$.
+\\Decimos que \emph{$\Gamma$ es consistente} si:
+\begin{equation*}
+    \nexists \phi \in F \tq \Gamma \vdash \phi \text{ y } \Gamma \vdash \neg \phi
+\end{equation*}
+y decimos que \emph{$\Gamma$ es inconsistente} si:
+\begin{equation*}
+    \exists \phi \in F \tq \Gamma \vdash \phi \text{ y } \Gamma \vdash \neg \phi
+\end{equation*}
+
+\subsubsection*{Definición 8. Maximal Consistente}
+Sea $\Gamma \subseteq F$.
+\\Decimos que \emph{$\Gamma$ es maximal consistente} (mc) si:
+\begin{enumerate}
+    \item $\Gamma$ es consistente
+    \item $\forall \phi \in F$ se cumple que:
+    \begin{equation*}
+        \phi \in \Gamma \text{ ó } \exists \Psi \in F \tq \Gamma \cup \{\phi\} \vdash \Psi \text{ y } \Gamma \cup \{\phi\} \vdash \neg \Psi \text{ (es inconsistente)}
+    \end{equation*}
+\end{enumerate}
+
+\subsubsection*{Definición 9. Sistema Axiomático Consistente}
+Un sistema axiomático \emph{$S$ es consistente} si:
+\begin{equation*}
+    \nexists \phi \in F \tq \vdash_S \phi \text{ y } \vdash_S \neg \phi
+\end{equation*}
+
+\subsection{Proposiciones}
+Sea $\Gamma \subseteq F$
+\begin{enumerate}
+    \item $\Gamma$ satisfacible $\Leftrightarrows \Gamma$ es consistente
+    \item $\Gamma \cup \{ \neg \phi \}$ es inconsistente $\Leftrightarrows \Gamma \vdash \phi$
+    \item $\Gamma \cup \{ \phi \}$ es inconsistente $\Leftrightarrows \Gamma \vdash \neg \phi$
+    \item Si $\Gamma \vdash \alpha$. Entonces:
+    \begin{equation*}
+        \Gamma \vdash \beta \Leftrightarrows \Gamma \cup \{ \alpha \} \vdash \beta \text{ con } \alpha \comma \beta \in F
+    \end{equation*}
+    \item $\Gamma$ es mc $\Rightarrows \phi \in \Gamma$ $\veebar$ $\neg \phi \in \Gamma$ $\:\:\forall \phi \in F$ 
+    \item $\Gamma$ mc, entonces: $\Gamma \vdash \phi \Leftrightarrows \phi \in \Gamma$
+\end{enumerate}
+
+
+\subsection{Teoremas}
+\subsubsection{Teorema 6.A}
+Sea $\alpha \in F$. Entonces:
+\begin{equation*}
+    \alpha \text{ es demostrable } \Rightarrows \alpha \text{ es tautología}
+\end{equation*}
+
+\subsubsection{Lema}
+Sean $\Gamma \comma \Sigma \comma \rho \subseteq F$
+\begin{equation*}
+    \Gamma \vdash \rho \Rightarrows \Gamma \cup \Sigma \vdash \rho
+\end{equation*}
+
+\subsubsection{Teorema de la Deducción (Versión Axiomática)}
+Sea $\Gamma \subseteq F; \alpha \comma \beta \in F$. Entonces:
+\begin{equation*}
+    \Gamma \vdash (\alpha \rightarrow \beta) \Leftrightarrows \Gamma \cup \{\alpha\} \vdash \beta
+\end{equation*}
+
+\subsubsection{Teorema de Correctitud y Completitud}
+Sea $\Gamma \subseteq F \comma \alpha \in F$. Entonces:
+\\\textbf{Correctitud}:
+\begin{equation*}
+    \Gamma \vdash \alpha \Rightarrows \alpha \in C(\Gamma)
+\end{equation*}
+\\\textbf{Completitud}
+\begin{equation*}
+    \alpha \in C(\Gamma) \Rightarrows \Gamma \vdash \alpha 
+\end{equation*}
+\leavevmode\\
+De esta manera:
+\begin{equation*}
+    \alpha \in C(\Gamma) \Leftrightarrows \Gamma \vdash \alpha 
+\end{equation*}
+
+\subsubsection{Lema de Lindenbaum}
+\begin{equation*}
+    \Gamma \text{ es consistente} \Rightarrows \exists \Gamma' \text{ mc} \tq \Gamma \subseteq \Gamma'
+\end{equation*}
+
+\subsubsection{Teorema 6.B}
+\begin{equation*}
+    \Gamma \text{ satisfacible} \Leftrightarrows \Gamma \text{ es consistente}
+\end{equation*}
+
+\subsubsection{Teorema 6.C}
+El sistema axiomático de la Teoría Axiomática que vimos es consistente.
+
+
+%---------------------------------------------------%
+\newpage
+\section{Lógica de 1er Orden - Sintaxis}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Alfabeto de la Lógica de 1er Orden}
+El alfabeto de la Lógica de 1er orden es:
+\begin{equation*}
+    A = VAR \cup \text{CONECTIVOS} \cup \{ ( , ) \} \cup \familia \cup \ctes \cup \partes
+\end{equation*}
+donde:
+\begin{enumerate}
+    \item $VAR = \{ x_1 \comma x_2 \comma ... \comma x_k \}$. \\\underline{Notación}:~$x_i \comma y_i \comma z_i \comma ...$
+    \item CONECTIVOS $= \{ \vee \comma \wedge \comma \rightarrow \comma \neg \} \cup \{ \underbrace{\forall}_{\substack{\text{cuantificador}\\\text{universal}}} \comma \underbrace{\exists}_{\substack{\text{cuantificador}\\\text{existencial}}} \}$ 
+    \item $\familia = $ es un conjunto cuyos elementos se llaman \emph{símbolos de función}. 
+    \\\underline{Notación}: $f_i^k \comma g_i^k \comma h_i^k \comma ...$ donde $k$ es la \emph{ariedad}.
+    \item $\ctes = $ es un conjunto cuyos elementos se llaman \emph{símbolos de constantes}.
+    \\\underline{Notación}: $c_i \comma d_i \comma k_i \comma ...$ 
+    \item $\partes = $ es un conjunto cuyos elementos se llaman \emph{símbolos de predicado}. $\partes \neq \varnothing$.
+    \\\underline{Notación}: $\partes = { P_0^{k_0}, P_1^{k_1}, ... , P_k^{k_k}}$
+\end{enumerate}
+
+\subsubsection*{Definición 2. Término}
+Definimos un \emph{término a partir de un alfabeto $A$} de la siguiente manera:
+\begin{enumerate}
+    \item Toda variable es un término.
+    \item Toda constante es un término.
+    \item Si $t_1 \comma t_2 \comma ... \comma t_k$ son términos y $f^k \in \familia$. Entonces:
+    \begin{equation*}
+        f^k(t_1 \comma t_2 \comma ... \comma t_k) \text{ es un término} 
+    \end{equation*}
+    \item Cualquier expresión de $A^*$ que se obtiene aplicando finitas veces 1, 2 y 3 es un término.
+\end{enumerate}
+\underline{Notación}: $TERM$
+
+\subsubsection*{Definición 3. Fórmula}
+Definimos una \emph{fórmula a partir de un alfabeto $A$} de la siguiente manera:
+\begin{enumerate}
+    \item $t_1 \comma t_2 \comma ... \comma t_k \in TERM$ y $P^k \in \partes$. Entonces:
+    \begin{equation*}
+        P^k(t_1 \comma t_2 \comma ... \comma t_k) \text{ es una fórmula y se llama \textbf{fórmula atómica}}
+    \end{equation*}
+    \item $\alpha \in Form \Rightarrows \neg \alpha \in Form$
+    \item $\alpha \comma \beta \in Form \Rightarrows (\alpha \wedge \beta) \comma (\alpha \vee \beta) \comma (\alpha \rightarrow \beta) \in Form$
+    \item $\alpha \in Form \comma x \in VAR \Rightarrows \forall x \:\: \alpha$ es una fórmula.
+    \item $\alpha \in Form \comma x \in VAR \Rightarrows \exists x \:\: \alpha$ es una fórmula.
+    \item Cualquier expresión de $A^*$ que se obtiene aplicando finitas veces 1, 2, 3, 4 y 5 es una fórmula.
+\end{enumerate}
+\underline{Notación}: $Form = F$
+\\\underline{Observación}: En lenguajes de 1er Orden, \emph{sólo podemos cuantificar variables}.
+
+\subsubsection*{Definición 4. Término cerrado}
+Un término se llama \emph{cerrado} si no tiene variables.
+
+\subsubsection*{Definición 5. Variables libres ligadas}
+\begin{enumerate}
+    \item Una aparición de una variable $x$ en una fórmula está \emph{ligada} si es alcanzada por un cuantificador.
+    \item Una variable es \emph{libre} en una fórmula si todas sus apariciones son libres.
+    \item Una variable es \emph{ligada} en una fórmula, si todas sus apariciones son ligadas.
+\end{enumerate}
+
+\subsubsection*{Definición 6. Sentencia/Enunciado}
+Una fórmula se llama \emph{sentencia/enunciado} si todas sus variables están ligadas.
+
+
+%-------------------------------------------------------------------%
+\newpage
+\section{Lógica de 1er Orden - Semántica}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Interpretación}
+Dado un alfabeto $A$ y un lenguaje $\lenguaje$ de 1er Orden, una \emph{interpretación $\interpretacion$ de un  leguaje $\lenguaje$} consiste en:
+\begin{enumerate}
+    \item $\universo \neq \varnothing$; $\universo$ conjunto que se llama \emph{universo}.
+    \item $c \in \ctes \Rightarrows c$ se interpreta como $c_I \in \universo$.
+    \item $f^k \in \familia \Rightarrows f^k$ se interpreta como una función cuyo dominio es $\universo^k$ y el codominio es $\universo$.
+    \item $P^k \in \partes \Rightarrows P^k$ se interpreta como una relación k-aria en $\universo$, es decir $P^k_i \in \universo^k$. 
+\end{enumerate}
+
+\subsubsection*{Definición 2. Valuación}
+Dado un lenguaje de 1er Orden y una interpretación $\interpretacion$ de $\lenguaje$.
+\\Llamamos \emph{valuación} a una función: 
+\begin{equation*}
+    v:VAR \rightarrow \universo
+\end{equation*}
+\textbf{¿Cómo interpretamos los términos?}
+\\Sea $\bar{v}:TERM \rightarrow \universo_\interpretacion$ una extensión de $v$ que verifica:
+\begin{enumerate}
+    \item $\bar{v}(x) = v(x)$ con $x \in VAR$
+    \item $\bar{v}(c) = \ctes_\interpretacion$ con $c \in \ctes$
+    \item $\bar{v}(f^k(t_1 \comma ... \comma t_k)) = f^k_\interpretacion(\bar{v}(t_1) \comma \bar{v}(t_k))$ donde $f^k \in \familia;\:t_1 \comma ... \comma t_k \in TERM$
+\end{enumerate}
+
+\subsubsection*{Definición 3. Valuación Modificada}
+\begin{equation*}
+    v_{x_i=a}:VAR \rightarrow \universo_\interpretacion \tq 
+    v_{x_i=a}(x) = 
+    \begin{cases}
+    v(x) &\text{si } x \neq x_i \\
+    a    &\text{si } x = x_i
+    \end{cases}
+\end{equation*}
+
+\subsubsection*{Definición 4. Valor de verdad}
+Dado $\lenguaje$ de 1er Orden, $\interpretacion$ de $\lenguaje$. 
+\\Asignamos el valor de verdad a las fórmulas de la siguiente manera:
+\\Sean $\beta \comma \beta_1 \comma \beta_2 \in FORM;\: x \in VAR$
+\begin{enumerate}
+    \item $\alpha = P^k(t_1 \comma ... \comma t_k)$ con $P^k \in \partes \comma t_j \in TERM \comma 1 \leq j \leq k$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}: Form(\lenguaje) \rightarrow \{0 \comma 1\} \tq \;\;\; V_{\interpretacion \comma v}(\alpha) = 1 \Leftrightarrows ((\bar{v}(t_1) \comma ... \comma \bar{v}(t_k)) \in P^k_\interpretacion
+    \end{equation*}
+    \item $\alpha = \neg \beta$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) = 1 - V_{\interpretacion \comma v}(\beta)
+    \end{equation*}
+    \item $\alpha = (\beta_1 \wedge \beta_2)$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) = min\{V_{\interpretacion \comma v}(\beta_1) \comma V_{\interpretacion \comma v}(\beta_2)\}
+    \end{equation*}
+    \item $\alpha = (\beta_1 \vee \beta_2)$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) = max\{V_{\interpretacion \comma v}(\beta_1) \comma V_{\interpretacion \comma v}(\beta_2)\}
+    \end{equation*}
+    \item $\alpha = (\beta_1 \rightarrow \beta_2)$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) = max\{1 - V_{\interpretacion \comma v}(\beta_1) \comma V_{\interpretacion \comma v}(\beta_2)\}
+    \end{equation*}
+    \item $\alpha = \forall x \: \beta$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) \Leftrightarrows V_{\interpretacion \comma v_{x=a}}(\beta) = 1 \text{ para todo elemento } a \in \universo_\interpretacion
+    \end{equation*}
+    \item $\alpha = \exists x \: \beta$. Entonces:
+    \begin{equation*}
+        V_{\interpretacion \comma v}(\alpha) \Leftrightarrows V_{\interpretacion \comma v_{x=a}}(\beta) = 1 \text{ para algun } a \in \universo_\interpretacion
+    \end{equation*}
+\end{enumerate}
+Además, hay algunas equivalencias que pueden sernos útiles:
+\begin{enumerate}
+    \item Todos los $A$ son $B$: $ \forall x (A(x) \rightarrow B(x))$
+    \item Algunos $A$ son $B$: $ \exists x (A(x) \wedge B(x))$
+    \item Ningún $A$ es $B$: $ \forall x (A(x) \rightarrow \neg B(x)$
+    \item $\exists x \: \alpha \equiv \neg \forall x \: \neg \alpha$
+    \item $\forall x \: \alpha \equiv \neg \exists x \: \neg \alpha$
+\end{enumerate}
+
+\underline{Observación}: Si todas las variables estan ligadas (\emph{enunciado}) entonces no terminamos usando las valuaciones.
+
+\subsubsection*{Definición 5. Fórmula Satisfacible}
+Sea $\lenguaje$ de 1er orden.
+\\Decimos que $\alpha$ es \emph{satisfacible} si $\exists\, \interpretacion$ interpretación$ \comma v $ valuación$\tq$
+\begin{equation*}
+    V_{\interpretacion \comma v}(\alpha) = 1
+\end{equation*}
+\underline{Notación}: $\interpretacion \vDash \alpha [v]$
+
+\subsubsection*{Definicion 6. Fórmula Verdadera/Válida}
+Sea $\lenguaje$ de 1er orden.
+\\Decimos que $\alpha$ es \emph{verdadera o válida} en una interpretación $\interpretacion$ si:
+\begin{equation*}
+    V_{\interpretacion \comma v}(\alpha) = 1 \:\:\: \forall v:VAR \rightarrow \universo_\interpretacion
+\end{equation*}
+\underline{Notación/Nombre}: \emph{$\interpretacion$ es un modelo para $\alpha$}
+
+\subsubsection*{Definición 7. Fórmula Universalmente Válida}
+Sea $\lenguaje$ de 1er Orden.
+\\Decimos que $\alpha$ es \emph{universalmente válida} si:
+\begin{equation*}
+    V_{\interpretacion \comma v}(\alpha) = 1 \:\:\: \forall v \text{ valuación y } \forall \interpretacion \text{ interpretación}
+\end{equation*}
+\underline{Notación}: $\vDash \alpha$
+
+\subsubsection*{Definición 8. Lenguaje con Igualdad}
+$\lenguaje$ es un \emph{lenguaje con igualdad} si tiene un símbolo de predicado binario que obligatoriamente se interpreta con la $=$ (igualdad).
+
+%--------------------------------------------------------
+\newpage
+\section{Lógica de 1er Orden}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Conjunto Expresable}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sea $\interpretacion$ una interpretación de $\lenguaje$ con universo $\universo$. 
+\\Sea $A \subseteq U$. Decimos que \emph{$A$ es expresable} si $\exists \alpha \in FORM$ con una única variable libre y todas las demas variables ligadas (\underline{Notación}: $\alpha(x)$, donde x es la variable libre), tal que:
+\begin{equation*}
+    V_{\interpretacion \comma v_{x=a}} \alpha(x) = 1 \Leftrightarrows x \in A 
+\end{equation*}
+o lo que es lo mismo:
+\begin{enumerate}
+    \item $A = \{ a \in \universo \tq  V_{\interpretacion \comma v_{x=a}} \alpha(x) = 1$
+    \item Si $x \in A \Rightarrows  V_{\interpretacion \comma v_{x=a}} \alpha(x) = 1 $ 
+        \\Si $x \notin A \Rightarrows V_{\interpretacion \comma v_{x=a}} \alpha(x) = 0$
+\end{enumerate}
+
+\subsubsection*{Definición 2. Elementos distinguibles}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sea $\interpretacion$ una interpretación de $\lenguaje$ con universo $\universo$.
+\\Sea $a \in \universo$, decimos que \emph{$a$ es distinguible} si $\{a\}$ es expresable.
+
+\subsubsection*{Definición 3. Isomorfismo}
+Sea $\lenguaje$ un lenguaje de 1er orden. Sean $\interpretacion_1$ e $\interpretacion_2$ interpretaciones de $\lenguaje$ con universos $\universo_1$ y $\universo_2$ respectivamente.
+\\Una función $F: \universo_1 \rightarrow \universo_2$ se llama isomorfismo si:
+\begin{enumerate}
+    \item $F$ es biyectiva
+    \item $c \in C$ y $c_{\interpretacion_1} \in \universo_1$ y $c_{\interpretacion_2} \in \universo_2$ sus respectivas interpretaciones
+    \begin{equation*}
+        F(c_{\interpretacion_1}) = c_{\interpretacion_2}
+    \end{equation*}
+    \item $f^k \in \familia$. Entonces:
+    \begin{equation*}
+        F(f^k_{\interpretacion_1}(u_1 \comma ... \comma u_k)) = f^k_{\interpretacion_2} (F(u_1) \comma ... \comma F(u_k))
+    \end{equation*}
+    \item $P^k \in \partes$. Entonces:
+    \begin{equation*}
+        (u_1 \comma ... \comma u_k) \in P^k_{\interpretacion_1} \Leftrightarrows (F(u_1) \comma ... \comma F(u_k)) \in P^k_{\interpretacion_2}
+    \end{equation*}
+\end{enumerate}
+\underline{Notación}: $\interpretacion_1 \approx \interpretacion_2$ ó $\interpretacion_1 \approx_F \interpretacion_2$ 
+\\\underline{Observación}: Si $\#\universo_1 \neq \#\universo_2$ entonces no puede haber ismorfismo.
+
+\subsection{Proposiciones}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sea $\interpretacion$ una interpretación de $\lenguaje$ con universo $\universo$. 
+\\Entonces:
+\begin{enumerate}
+    \item El conjunto $\varnothing$ y el universo $\universo_\interpretacion$ son expresables
+    \item Si $A \subset \universo_\interpretacion$ es expresable $\Rightarrows \universo_\interpretacion - A$ es expresable
+    \item Sean $A, B \subset \universo_\interpretacion$ expresables $\Rightarrows A \cup B$, $A \cap B$, $A \setminus B$, $A \triangle B$ es expresable
+\end{enumerate}
+
+\subsection{Teoremas}
+\subsubsection{Lema}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sean $\interpretacion_1$ e $\interpretacion_2$ interpretaciones de $\lenguaje$. Sea $h$ un isomorfismo de $\interpretacion_1$ a $\interpretacion_2$. Sea $v$ una valuación en $\interpretacion_1$. Entonces:
+\begin{equation*}
+    \overline{h \circ v} = h \circ \overline{v}
+\end{equation*}
+\subsubsection{Teorema 9.A}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sean $\interpretacion_1$ e $\interpretacion_2$ interpretaciones de $\lenguaje$. Sea $h$ un isomorfismo de $\interpretacion_1$ a $\interpretacion_2$. Sea $v$ una valuación en $\interpretacion_1$. Entonces:
+\begin{equation*}
+    \interpretacion_1 \vDash \alpha[v] \Leftrightarrows \interpretacion_2 \vDash \alpha[h \circ v]
+\end{equation*}
+\subsubsection{Corolario A.1}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sean $\interpretacion_1$ e $\interpretacion_2$ interpretaciones de $\lenguaje$,  $\interpretacion_1 \approx_h \interpretacion_2$. Y sea $\alpha$ un enunciado de $\lenguaje$. Entonces:
+\begin{equation*}
+    \interpretacion_1 \text{ es un modelo de } \alpha \Leftrightarrows \interpretacion_2 \text{ es un modelo de } \alpha
+\end{equation*}
+o lo que es lo mismo:
+\begin{equation*}
+    \interpretacion_1 \vDash \alpha[v] \:\: \forall v \text{ val en } \interpretacion_1 \Leftrightarrows
+    \interpretacion_2 \vDash \alpha[w] \:\: \forall w \text{ val en } \interpretacion_2
+\end{equation*}
+\underline{Apunte}: Esto nos puede servir para demostrar que  $\interpretacion_1 \: \cancel{\approx} \: \interpretacion_2$ .
+\subsubsection{Corolario A.2}
+Sea $\lenguaje$ de 1er Orden. $\interpretacion$ interpretación de $\lenguaje$ con universo $\universo$. $F: \universo \rightarrow \universo$. Entonces:
+\begin{equation*}
+    a \in \universo \text{ distinguible } \Rightarrows F(a) = a
+\end{equation*}
+\underline{Apunte}: Esto nos puede servir para demostrar que un elemento no es distinguible.
+\subsubsection{Corolario A.3}
+Sea $\lenguaje$ un lenguaje de 1er Orden y sea $\interpretacion$ una interpretación de $\lenguaje$ con universo $\universo$. Sea $F: \universo \rightarrow \universo$ un isomorfismo. Entonces:
+\begin{equation*}
+    a \text{ es expresable } \Rightarrows F(A) \subseteq A \:\: \forall A \subseteq \universo
+\end{equation*}
+\subsubsection{Corolario A.4}
+Sea $\lenguaje$ un lenguaje de 1er Orden. Sean $\interpretacion_1$ e $\interpretacion_2$ interpretaciones de $\lenguaje$, $\interpretacion_1 \approx \interpretacion_2$. Entonces:
+\begin{equation*}
+    \text{Si } a \in \universo_1 \text{ es distinguible en } \interpretacion_1 \Rightarrows h(a) \in \universo_2 \text{ es distinguible en } \interpretacion_2
+\end{equation*}
+\underline{Apunte}: Esto nos puede servir para armar un isomorfismo.
+
+
+%-----------------------------------------------------------------------------------
+\newpage
+\section{Lenguaje S}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Variables}
+Hay 3 tipos de variables:
+\begin{enumerate}
+    \item \underline{Variables de entrada}: $X_1 \comma X_2 \comma ...$
+    \item \underline{Variable de salida}: $Y$
+    \item \underline{Variables auxiliares}: $Z_1 \comma Z_2 \comma ...$
+\end{enumerate}
+Tanto la \emph{variable de salida} como las \emph{variables auxiliares} están \textbf{inicializadas en 0}.
+\\El tipo de datos para todas ellas son los $\naturales$ (no hay que declararlo en ningún lugar).
+
+\subsubsection*{Definición 2. Etiquetas}
+Las etiquetas son:
+\begin{equation*}
+    A_1 \comma B_1 \comma C_1 \comma D_1 \comma E_1 \comma A_2 \comma B_2 \comma C_2 \comma D_2 \comma E_2 \comma A_3 \comma ...
+\end{equation*}
+
+\subsubsection*{Definición 3. Instrucciones}
+Hay 3 tipos:
+\begin{enumerate}
+    \item $V \leftarrow V + 1$
+    \item $V \leftarrow V - 1$
+    \item $IF$ $V \neq 0$ $GOTO$ $L$ donde $[L]$ es una etiqueta.
+\end{enumerate}
+Dado que el dominio son los numeros naturales, si al ejecutar $V \leftarrow V-1$, $V$ estaba en $0$, entonces sigue valiendo $0$. Es decir: $0 - 1 = 0$
+
+\subsubsection*{Definición 4. Programa}
+Es una lista finita de instrucciones $I_1 \comma I_2 \comma ... \comma I_n$ que se escribe una debajo de la otra.
+
+\subsubsection*{Definición 5. Macro}
+Una \emph{Macro} es una pseudo-instrucción que representa un segmento de programa.
+\\Cada vez que en un programa $P$ aparece una macro, hay que reemplazarla por el segmento de programa que representa. Dicho segmento de programa se denomina \emph{expansión de la macro}.
+
+\subsubsection*{Definición 6. Estado}
+Un \emph{estado de un programa $P$} es una lista finita de igualdades de la forma $V = m$, donde $V$ es una varaiable y $m \in \naturales$.
+\\Hay una única igualdad para cada variable que aparece en $P$.
+
+\subsubsection*{Definición 7. Descripción Instantánea (Snapshot/Foto)}
+Supongamos que un programa $P$ tiene longitud $n$, es decir tiene $n$ instrucciones $I_1 \comma I_2 \comma ... \comma I_n$.
+\\Para un estado $\sigma$ de $P$ y un $i \in \{1 \comma 2 \comma ... \comma n \comma n+1\}$ tenemos que el par $(i \comma \sigma)$ es una foto de $P$, la cual se llama \emph{terminal} si $i = n+1$.
+\\De esta manera, $i$ dice a que instrucción  apunta antes de ser ejecutada. Ademas, en $\sigma$ estan los valores de las variables antes de ejecutas la instrucción $i$.
+\\Dada una foto $(i \comma \sigma)$ no terminal, se define la foto \emph{sucesora} $(j \comma \tau)$ de la sigueinte manera:
+\begin{enumerate}
+    \item Si la $i$-ésima instrucción es $V \leftarrow V+1$
+    \begin{equation*}
+        \Rightarrows j=i+1 \comma \tau = \sigma \text{ salvo que si } \underbrace{V=m}_{\text{en } \sigma} \Rightarrows \underbrace{V = m+1}_{\text{en } \tau}
+    \end{equation*}
+    \item Si la $i$-ésima instrucción es $V \leftarrow V-1$
+    \begin{equation*}
+        \Rightarrows j=i+1 \comma \tau = \sigma \text{ salvo que si } \begin{cases}
+            \underbrace{V=m > 0}_{\text{en } \sigma} &\Rightarrows \underbrace{V =     m-1}_{\text{en } \tau}\\
+            \underbrace{V=0}_{\text{en } \sigma} &\Rightarrows \underbrace{V = 0}_{\text{en } \tau}
+        \end{cases}
+    \end{equation*}
+    \item Si la $i$-ésima instrucción es \tsaltoinc{V}{L}
+    \begin{equation*}
+        \Rightarrows \tau = \sigma \comma j = \begin{cases}
+        i+1 &\text{ si } V = 0 \text{ en } \sigma \\
+        k   &\text{ si } V \neq 0 \text{ en } \sigma
+        \end{cases}
+    \end{equation*}
+    siendo $k = \begin{cases}
+    min\{t \tq I_t \text{ esta etiquetado con L}\} &\text{ si } A \neq \varnothing\\
+    n+1 &\text{ si ninguna instrucción esta etiquetada con } L
+    \end{cases}
+    $
+\end{enumerate}
+
+\subsubsection*{Definición 8. Cómputo}
+Un cómputo de un programa $P$ a partir de una foto $d_1 = (i \comma \sigma)$ es una lista finita $d_1 \comma d_2 \comma ... \comma d_k$ de fotos siendo $d_{j+1}$ la foto sucesora de $d_j$ y $d_k$ es la foto terminal.
+
+\subsubsection*{Definicion 9. Estado Inicial}
+Sea $P$ un programa y $u_1 \comma u_2 \comma ... \comma u_m$ números naturales. El \emph{estado inicial} de $P$ para dichos valores es $\sigma = \{ X_1=u_1 \comma X_2=u_2 \comma ... \comma X_m = u_m \comma \underbrace{X_j = 0}_{\text{si aparece}} (j > m) \comma \underbrace{Z_j = 0}_{\text{si aparece}} \comma Y=0\}$
+\\La descripción inicial es $d_1 = (1 \comma \sigma)$.
+
+\subsubsection*{Definición 9. Cómputo a partir de un estado inicial}
+Sea $P$ un programa $u_1 \comma ... \comma u_m$ de números naturales y $\sigma_1$ el estado inicial para ellos.
+\\Existen dos posibilidades:
+\begin{enumerate}
+    \item \emph{"El Programa termina ante dichas entradas"}:
+    \\Existe un cómputo de $P$ a partir de $d_1=(1\comma \sigma_1)$, es decir existe $d_1 \comma ... \comma d_k$ terminal:
+    \begin{equation*}
+        \Psi_p^m (u_1 \comma ... \comma u_m) = \text{ el valor de $Y$ en $d_k$}
+    \end{equation*}
+    \item \emph{"El Programa no termina"}
+    \\No existe un cómputo de $P$ a partir de $d_1 = (1 \comma \sigma_1)$
+    \begin{equation*}
+        \Psi_p^m (u_1 \comma ... \comma u_m) = \uparrow
+    \end{equation*}
+\end{enumerate}
+
+\subsubsection*{Definición 10. Función computable}
+\begin{enumerate}
+    \item Una función $f: \naturales^k \rightarrow \naturales$ es \emph{parcialmente computable} si existe un programa $P$ tal que $f = \Psi^k_p$
+    \begin{align*}
+        \text{si } &x=(x_1 \comma ... \comma x_k) \in \naturales^k \\
+        \text{si } &x \in Dom(f) \Rightarrows f(x_1 \comma ... \comma x_k) = \Psi^k_m(x_1 \comma ... \comma x_k) \\
+        \text{si } &x \notin Dom(f) \Rightarrows \Psi^k_m(x_1 \comma ... \comma x_k) = \uparrow
+    \end{align*}
+    \item Una función $f: \naturales^k \rightarrow \naturales$ es \emph{computable} si es parcialmente computable y \emph{total} (osea $Dom(f) = \naturales^k$)
+\end{enumerate}
+
+\subsection{Macros útiles}
+\subsubsection{Salto Incondicional}
+La macro es: $GOTO$ $L$
+\\Y la expasión de la macro es la siguiente:
+    \begin{align*}
+        &V \leftarrow V + 1 \\
+        &\msaltoinc{V}{L}
+    \end{align*}
+    
+\subsubsection{Asignación de Cero}
+La macro es: $V \leftarrow 0$
+\\Y la expansión de la macro es la siguiente:
+    \begin{align*}
+        [L] \ms &V \leftarrow V-1\\
+                &\msaltoinc{V}{L}
+    \end{align*}
+    
+\subsubsection{Asignación de Variables}
+La macro es: $Y \leftarrow X_1$
+\\Y la expansión de la macro es la siguiente:
+    \begin{align*}
+        &Y \leftarrow 0 \\
+        &Z_1 \leftarrow 0 \\
+        [A_1] \ms &\msaltoinc{X_1}{B_1}\\
+        &GOTO \ms C_1\\
+        &X_1 \leftarrow X_1 - 1\\
+        &Y \leftarrow Y+1\\
+        &Z_1 \leftarrow Z_1 + 1\\
+        &GOTO \ms A_1\\
+        [C_1] \ms &\msaltoinc{Z_1}{D_1}\\
+        &GOTO \ms E_1\\
+        [D_1] \ms &Z_1 \leftarrow Z_1 - 1 \\
+        &X_1 \leftarrow X_1 + 1\\
+        &GOTO \ms C_1
+    \end{align*}
+    
+
+%----------------------------------------------------------------------
+\newpage
+\section{Funciones Recursivas Primitivas}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Esquema Recursivo tipo I (ERI)}
+Sea $h: \naturales \rightarrow \naturales$ y $g: \naturales^2 \rightarrow \naturales$. 
+\\Decimos que \emph{$h$ se obtiene a partir de $g$ por un ERI} si se puede escribir de la siguiente manera:
+\begin{align*}
+    &h(0) = k \in \naturales \\
+    &h(n+1) = g(n \comma h(n))
+\end{align*}
+
+\subsubsection*{Definición 2. Esquema Recursivo tipo II (ERII)}
+Sea $h: \naturales^{n+1} \rightarrow \naturales \comma g: \naturales^{n+2} \rightarrow \naturales \comma q: \naturales^n \rightarrow \naturales$.
+\\Decimos que \emph{$h$ se obtiene por ERII a partir de $g$ y $q$} si puede escribirse:
+\begin{align*}
+    &h(x_1 \comma x_2 \comma ... \comma x_n \comma 0) = q(x_1 \comma ... \comma x_n) \\
+    &h(x_1 \comma x_2 \comma ... \comma x_n \comma y+1) = g(x_1 \comma x_2 \comma ... \comma x_n \comma y \comma h(x_1 \comma x_2 \comma ... \comma x_n \comma y))
+\end{align*}
+
+\subsubsection*{Definición 3. Funciones Iniciales}
+Las siguientes funciones se denominan \emph{funciones iniciales}
+\begin{enumerate}
+    \item \underline{Cero}. $\naturales \rightarrow \naturales \tq CERO(x) = 0$
+    \item \underline{Sucesión}. $\naturales \rightarrow \naturales \tq SUC(x) = x+1$
+    \item \underline{Proyección}. $\naturales^n \rightarrow \naturales \tq \prod^n_j (x_1 \comma ... \comma x_n) = x_j$ con $1 \leq j \leq n$
+\end{enumerate}
+\underline{Observación}: Las funciones iniciales son computables
+
+\subsubsection*{Definición 4. Recursiva Primitiva (RP)}
+Una función es RP si es inicial o se obtiene aplicando finitas "operaciones válidas" a las funciones inicales.
+\\Las operaciones válidas son: composición, ERI y ERII.
+
+\subsubsection*{Definición 5. Predicados RP}
+Un predicado $P^k$ de $k$ variables es una relación $k$-aria de números naturales.
+\\Es decir, se asocia a $P^k$ una función denominada \emph{función característica} que se define como sigue:
+\begin{equation*}
+    C_{P^k}: \naturales^k \rightarrow \{ 0 \comma 1 \} \tq C_{P^k} = \begin{cases}
+        1 &\text{si } \Vec{x} \in P^k \\
+        0 &\text{si } \Vec{x} \notin P^k
+    \end{cases}
+\end{equation*}
+\underline{Notación}: $C_{P^k} = X_{P^k}$
+\\Decimos "\emph{$P^k$ es RP(computable)}" si $C_{P^k}$ es RP(computable)
+
+
+\subsection{Funciones que son RP}
+\begin{enumerate}
+    \item \underline{fact}. $\naturales \rightarrow \naturales \tq fact(x) = x!$
+    \item \underline{Suma}. $\naturales^2 \rightarrow \naturales \tq SUMA(x \comma y) = x + y$
+    \item \underline{Constante}. $\naturales \rightarrow \naturales \tq h_k(x) = k$ con $k \in \naturales$
+    \item \underline{Producto}. $\naturales^2 \rightarrow \naturales \tq PROD(x \comma y) = x . y$
+    \item \underline{Potencia}. $\naturales^2 \rightarrow \naturales \tq POT(x \comma y) = (x + 1)^y$
+    \item \underline{Predecesor}. $\naturales \rightarrow \naturales \tq PRED(x) = \begin{cases}
+    0 &x = 0 \\
+    x - 1 &x \neq 0
+    \end{cases}$
+    \item \underline{Resta Truncada}. $\naturales^2 \rightarrow \naturales \tq \Dot{-}(x \comma y) = x \Dot{-} y = \begin{cases}
+    x - y &x \geq y \\
+    0 &x < y
+    \end{cases}$
+    \item \underline{Distancia}. $\naturales^2 \rightarrow \naturales \tq DIST(x \comma y) = |x - y|$
+    \item \underline{Alpha}. $\naturales \rightarrow \naturales \tq \alpha(x) = \begin{cases}
+    1 &x = 0 \\
+    0 &x \neq 0
+    \end{cases}$
+    \item \underline{Igualdad}. $\naturales^2 \rightarrow \naturales \tq EQ(x \comma y) = \begin{cases}
+    0 &x \neq y \\
+    1 &x = y
+    \end{cases}$
+    \item \underline{Máximo}. $\naturales^2 \rightarrow \naturales \tq MAX(x \comma y) = \begin{cases}
+    x &x \geq y \\
+    y &x < y
+    \end{cases}$
+    \item \underline{Impar}. $\naturales \rightarrow \naturales \tq IMPAR(x) = \begin{cases}
+    0 &\text{si $x$ es par} \\ 
+    1 &\text{si $x$ es impar}
+    \end{cases}$
+    \item \underline{Mitad}. $\naturales \rightarrow \naturales \tq MITAD(x) = \begin{cases}
+    \frac{x}{2} &\text{si $x$ es par} \\ 
+    \frac{x-1}{2} &\text{si $x$ es impar}
+    \end{cases}$
+    \item \underline{Composición de $f$ $n$ veces}. $\naturales^2 \rightarrow \naturales \tq I_f(n \comma x) = f^n(x)$
+    \item \underline{MCD}. $\naturales^2 \rightarrow \naturales \tq MCD(x,y) = \text{MCD entre x e y}$ (máximo común divisor)
+    \item \underline{MCM}. $\naturales^2 \rightarrow \naturales \tq MCM(x,y) = \text{MCM entre x e y}$ (mínimo común múltiplo)
+\end{enumerate}
+
+\subsection{Teoremas}
+\subsubsection{Teorema 11.A}
+Sea $f:\naturales^k \rightarrow \naturales$; $g_1 \comma g_2 \comma ... \comma g_k: \naturales^m \rightarrow \naturales$; $h: \naturales^m \rightarrow \naturales$ tal que:
+\begin{align*}
+    &h(x_1 \comma ... \comma x_m) = f(g_1(x_1 \comma ... \comma x_m)\comma g_2(x_1 \comma ... \comma x_m) \comma ... \comma g_k(x_1 \comma ... \comma x_m)) \\
+    &\Leftrightarrows h = f \circ (g_1 \times g_2 \times ... \times g_k)
+\end{align*}
+Entonces:
+\begin{equation*}
+    \text{Si } f \comma g_1 \comma ... \comma g_k \text{ son (parcialmente) computables } \Rightarrows h \text{ es (parcialmente) computable}
+\end{equation*}
+
+\subsubsection{Teorema 11.B}
+\begin{equation*}
+    \text{Si $h$ se obtiene a partir de $g$ por un ERI y $g$ es computable } \Rightarrows \text{ $h$ es computable} 
+\end{equation*}
+
+\subsubsection{Teorema 11.C}
+Sea $h$ una función que se obtiene por ERII a partir de $g$ y $q$. Entonces:
+\begin{equation*}
+    \text{Si $g$ y $q$ son computables $\Rightarrows h$ es computable}
+\end{equation*}
+
+\subsubsection{Teorema 11.D}
+\begin{equation*}
+    \text{Si $f: \naturales^k \rightarrow \naturales$ es RP $\Rightarrows f$ es computable}    
+\end{equation*}
+\underline{Observaciones}:
+\begin{enumerate}
+    \item Si $f$ no es total $\Rightarrows f$ no es RP
+    \item Existen funciones computables que no son RP
+\end{enumerate}
+
+\subsubsection{Teorema 11.E}
+\begin{equation*}
+    f \text{ es composición de funciones RP } \Rightarrows f \text{ es RP}
+\end{equation*}
+
+\subsubsection{Teorema 11.F}
+\begin{enumerate}
+    \item $P^k$ y $Q^k$ predicados RP(computables) $\Rightarrows (P \cap Q)$ y $\neg P$ son predicados RP(computables)
+    \item $P^k$ y $Q^k$ predicados RP(computables) $\Rightarrows (P \cup Q)$ y $(P \rightarrow Q)$ son predicados RP(computables)
+\end{enumerate}
+
+\subsubsection{Teorema 11.G}
+Sean $h \comma g: \naturales^k \rightarrow \naturales$ funciones RP(computables) y sea $P^n$ un predicado RP(computable) y sea $f: \naturales^n \rightarrow \naturales \tq$
+\begin{equation*}
+    f(\Vec{x}) = \begin{cases}
+    h(\Vec{x}) &\text{si } \Vec{x} \in P \\
+    g(\Vec{x}) &\text{si } \Vec{x}  \notin P
+    \end{cases}
+\end{equation*}
+Entonces $f$ es RP(computable)
+
+\subsubsection{Teorema 11.H}
+Sean $g_1 \comma ... \comma g_m \comma h: \naturales^n \rightarrow \naturales$ funciones RP(computables). $P_1 \comma ... \comma P_m$ predicados $n$-arios RP(computables). $P_i \cap P_j = \varnothing$ si $i \neq j$. Sea $f: \naturales^n \rightarrow \naturales \tq$
+\begin{equation*}
+    f(\Vec{x}) = \begin{cases}
+    g_1(\Vec{x}) &\text{si } \Vec{x} \in P_1 \\
+    g_2(\Vec{x}) &\text{si } \Vec{x}  \in P_2 \\
+    &\vdots \\
+    g_m(\Vec{x}) &\text{si } \Vec{x}  \in P_m \\
+    h(\Vec{x}) &\text{sino} \\
+    \end{cases}
+\end{equation*}
+Entonces f es RP(computable)
+
+\subsubsection{Suma y Productoria Acotadas}
+Sea $f:\naturales^{n+1} \rightarrow \naturales$ es RP(computable). Sean $SA_f \comma PA_f: \naturales^{n+1} \rightarrow \naturales \tq$
+\begin{align*}
+    &SA_f(\Vec{x} \comma y) = \sumatoria{k=0}{y} f(\Vec{x} \comma k)\\
+    &PA_f(\Vec{x} \comma y) = \prod_{k=0}^y f(\Vec{x} \comma k)
+\end{align*}
+siendo $\Vec{x} = (x_1 \comma ... \comma x_n)$ con $n \in \naturales$.
+\begin{equation*}
+    \text{Si $n=0$, $SA_f(y) = \sumatoria{k=0}{y} f(k)$ y $PA_f(y) = \prod_{k=0}^{y} f(k) \Rightarrows SA_f$ y $PA_f$ son RP(computables)}
+\end{equation*}
+
+\subsubsection{Cuantificadores acotados con $\leq$}
+Sea $P^{k+1}$ un predicado RP(computable). Dados,
+\begin{enumerate}
+    \item \underline{Existencial Acotado}:
+    \begin{equation*}
+        EA_P: \naturales^{k+1} \rightarrow \{0 \comma 1\} \tq EA_P(\Vec{x} \comma y) = \exists t \leq y \:\: C_P(\Vec{x} \comma y) 
+    \end{equation*}
+    donde $\Vec{x} = (x_1 \comma ... \comma x_k)$.
+    \\Este predicado es verdadero $\Leftrightarrows C_P(\Vec{x} \comma 0) = 1$ o $C_P(\Vec{x} \comma 1) = 1$ o ... o $C_P(\Vec{x} \comma y) = 1$
+    \item \underline{Universal Acotado}:
+    \begin{equation*}
+        UA_P: \naturales^{k+1} \rightarrow \{0 \comma 1\} \tq UA_P(\Vec{x} \comma y) = \forall t \leq y \:\: C_P(\Vec{x} \comma y) 
+    \end{equation*}
+    donde $\Vec{x} = (x_1 \comma ... \comma x_k)$.
+    \\Este predicado es verdadero $\Leftrightarrows C_P(\Vec{x} \comma 0) = 1$ y $C_P(\Vec{x} \comma 1) = 1$ y ... y $C_P(\Vec{x} \comma y) = 1$
+\end{enumerate}
+Entonces, $EA_P$ es RP(computable) y $UA_P$ es RP(computable)
+
+\subsubsection{Cuantificadores acotados con $<$}
+Sea $P^{k+1}$ un predicado RP(computable). Dados,
+\begin{enumerate}
+    \item \underline{Existencial Acotado Estricto}:
+    \begin{equation*}
+        EAE_P: \naturales^{k+1} \rightarrow \{0 \comma 1\} \tq EAE_P(\Vec{x} \comma y) = \exists t < y \:\: C_P(\Vec{x} \comma y) 
+    \end{equation*}
+    donde $\Vec{x} = (x_1 \comma ... \comma x_k)$.
+    \\Este predicado es verdadero $\Leftrightarrows C_P(\Vec{x} \comma 0) = 1$ o $C_P(\Vec{x} \comma 1) = 1$ o ... o $C_P(\Vec{x} \comma y) = 1$
+    \item \underline{Universal Acotado Estricto}:
+    \begin{equation*}
+        UAE_P: \naturales^{k+1} \rightarrow \{0 \comma 1\} \tq UAE_P(\Vec{x} \comma y) = \forall t < y \:\: C_P(\Vec{x} \comma y)
+    \end{equation*}
+    donde $\Vec{x} = (x_1 \comma ... \comma x_k)$.
+    \\Este predicado es verdadero $\Leftrightarrows C_P(\Vec{x} \comma 0) = 1$ y $C_P(\Vec{x} \comma 1) = 1$ y ... y $C_P(\Vec{x} \comma y) = 1$
+\end{enumerate}
+Entonces, $EAE_P$ es RP(computable) y $UAE_P$ es RP(computable)
+
+\subsubsection{Minimización Acotada}
+Sea $P^{k+1}$ un predicado RP(computable), y sea 
+\begin{equation*}
+    MA_P: \naturales^{n+1} \rightarrow \naturales \tq MA_P(\Vec{x} \comma y) = \begin{cases}
+    min_{t \leq y} \:\: C_P(\Vec{x} \comma t) &\text{si existe } t \leq y \tq C_P(\Vec{x} \comma y) = 1\\
+    0 &\text{sino}
+    \end{cases}
+\end{equation*}
+Entonces, $MA_P$ es RP(computable)
+
+\subsubsection{Minimización No Acotada}
+Sea $P^{k+1}$ un predicado RP(computable), y sea 
+\begin{equation*}
+    H(\Vec{x}) = min_t \:\: C_P(\Vec{x} \comma t) = \begin{cases}
+    min\{t \in \naturales \tq C_P(\Vec{x} \comma t) = 1\} &\text{si } A \neq \varnothing \\
+    \uparrow &\text{si } A = \varnothing
+    \end{cases}
+\end{equation*}
+es parcialmente computable
+
+%-------------------------------------------------------------------------------
+\newpage
+\section{Funciones Computables}
+\subsection{Definiciones Previas}
+\subsubsection*{Definición 1. Función par}
+Sea $< \:\comma >: \naturales^2 \rightarrow \naturales \tq$
+\begin{equation*}
+    <x \comma y> = 2^x (2y + 1) - 1
+\end{equation*}
+se llama \emph{función par}.
+
+\subsubsection*{Definición 2. Funciones \emph{left} y \emph{right}}
+Sean 
+\begin{align*}
+    l: \naturales \rightarrow \naturales \tq l(z) = x &\text{ tal que } z = < x \comma y > \\
+    r: \naturales \rightarrow \naturales \tq r(z) = y &\text{ tal que } z = < x \comma y >
+\end{align*}
+$l$ se llama \emph{función left} y $r$ se llama \emph{función right}.
+
+\subsubsection*{Definición 3. Numeración de Gödel}
+Sea $k \in \naturales$. \\
+Para cada $k$ se define una función
+\begin{equation*}
+    [ \comma ... \comma ]: \naturales^{k+1} \rightarrow \naturales \tq [(a_0 \comma ... \comma a_k)] = P_0^{a_0} ... P_k^{a_k}
+\end{equation*}
+donde $P_i$ representa el $(i+1)$-primo $(P_0 = 2 \comma P_1 = 3 \comma P_2 = 5 \comma ...)$.
+\\\underline{Nombre}: $[(a_0 \comma ... \comma a_k)]$ se llama \emph{número de Gödel}
+
+\subsubsection*{Definición 4. Longitud de un Número de Gödel}
+Sea $n \in \naturales$. Entonces si $n \neq 0 \Rightarrows n = P_0^{\alpha_0} \comma P_1^{\alpha_1} \comma P_2^{\alpha_2} \comma ... \comma P_k^{\alpha_k}$ con $\alpha_k \neq 0$ se define la \emph{longitud de n} como:
+\begin{equation*}
+    long(n) = long[(\alpha_0 \comma ... \comma \alpha_k)] = k
+\end{equation*}
+
+\subsubsection*{Definición 5. Indicadores de Números de Gödel}
+\begin{enumerate}
+    \item $\bullet [ \bullet ]: \naturales^2 \rightarrow \naturales \tq x[i] = V_{p_i}(x)$
+    \item $| \bullet | : \naturales \rightarrow \naturales \tq | n | = \begin{cases}
+    long(n) &n \neq 0 \\
+    0 &n = 0 
+    \end{cases}$
+\end{enumerate}
+
+\subsubsection*{Definición 6. Problema de la Parada}
+Definimos:
+\begin{equation*}
+    Halt: \naturales^2 \rightarrow \naturales \tq Halt(x \comma y) = \begin{cases}
+    1 &\text{ si el programa de código $y$ ante la entrada $x$ termina} \\
+    0 &\text{sino (es decir $\Psi_P (x) = \uparrow \tq \sharp P = y$)}
+    \end{cases}
+\end{equation*}
+
+\subsubsection*{Definición 7. Programas Universales}
+Para cada $n > 0$ se define:
+\begin{equation*}
+    \phi^n : \naturales^{n+1} \rightarrow \naturales \tq \phi^n (x_1 \comma ... \comma x_n \comma e) = \Psi_P^n (x_1 \comma ... \comma x_n) \text{ tal que } \sharp P = e
+\end{equation*}
+
+\subsection{Codificación}
+\subsubsection{Codificación de Instrucciones}
+\subsubsection*{Variables}
+Enumeramos las variables en el siguiente orden:
+\begin{equation*}
+    Y \comma X_1 \comma Z_1 \comma X_2 \comma Z_2 \comma X_3 \comma Z_3 \comma ...
+\end{equation*}
+Es decir, la variable $Y$ está en la posición 1 de la lista, la variable $X_1$ en la posición 2, etc. 
+
+\subsubsection*{Etiquetas}
+Enumeramos las etiquetas en el siguiente orden:
+\begin{equation*}
+    A_1 \comma B_1 \comma C_1 \comma D_1 \comma E_1 \comma A_2 \comma B_2 \comma C_2 \comma ...
+\end{equation*}
+Es decir, la etiqueta $A_1$ tiene la posición 1 de la lista, la etiqueta $B_1$ tiene la posición 2 de la lista, etc.
+
+\subsubsection*{Instrucciones}
+Disponemos de 4 instrucciones:
+\begin{align*}
+    &V \leftarrow V + 1 \\
+    &V \leftarrow V - 1 \\
+    &\text{$IF$ $V \neq 0$ $GOTO$ $L$} \\
+    &V \leftarrow V
+\end{align*}
+
+\subsubsection{Función $\sharp I$}
+
+De esta manera, definimos:
+\begin{equation*}
+    \sharp: \{ \text{Instrucciones} \} \rightarrow \naturales \tq \sharp I = < a \comma < b \comma c > >
+\end{equation*}
+Donde 
+\begin{enumerate}[label=\textbf{\alph*}:]
+    \item Está asociado a la etiqueta de la instrucción
+    \begin{equation*}
+        a = \begin{cases}
+        0 &\text{si $I$ no tiene etiqueta} \\
+        \sharp L &\text{si $I$ tiene adelante la etiqueta $L$}
+        \end{cases}
+    \end{equation*}
+    \item Esta asociado al tipo de instrucción
+    \begin{equation*}
+    b = \begin{cases}
+    0 &\text{si $I$ es $V \leftarrow V$} \\
+    1 &\text{si $I$ es $V \leftarrow V + 1$} \\
+    2 &\text{si $I$ es $V \leftarrow V - 1$} \\
+    \sharp L + 2 &\text{si $I$ es $IF$ $V \neq 0$ $GOTO$ $L$}
+    \end{cases}    
+    \end{equation*}
+
+    \item Está asociado a la variable que aparece en la instrucción
+    \begin{equation*}
+        C = \sharp V - 1 \comma \text{siendo $V$ la variable que aparece en la instrucción $I$}
+    \end{equation*}
+\end{enumerate}
+
+\subsubsection{Codificación de Programas}
+\subsubsection{Función $\sharp \partes$}
+Dado un programa $\partes$ que tiene $k$ instrucciones: $I_1 \comma I_2 \comma I_3 \comma ... \comma I_k$ definimos:
+\begin{equation*}
+    \sharp : \{ \text{Programas} \} \rightarrow \naturales \tq \sharp \partes_{I_1 \comma ...  \comma I_k} = [( \sharp I_1 \comma ...  \comma \sharp I_k)]_k - 1
+\end{equation*}
+Además, agregamos una \textbf{restricción} a los programas en Lenguaje S: \emph{la última instrucción NO puede ser $Y \leftarrow Y$, a menos que sea la única instrucción}.
+
+\subsection{Proposiciones}
+\begin{enumerate}
+    \item $Halt(x,y)^n = Halt(x,y)$ \textbf{(demostarlo siempre que se quiera usar)}
+\end{enumerate}
+
+\subsection{Teoremas}
+\subsubsection{Función Par}
+La función Par es biyectiva.
+
+\subsubsection{Funciones Par, Left y Right}
+Las funciones Par, Left y Right son RP.
+
+\subsubsection{Funciones Números de Gödel}
+Las funciones que calculan los números de Gödel son inyectivas y RP, pero NO sobreyectivas.
+
+\subsubsection{Funciones $\bullet[\bullet]$ y $| \bullet |$}
+Las funciones $\bullet[\bullet]$ y $| \bullet |$ son RP.
+
+\subsubsection{Funciones $\sharp I$ y $\sharp \partes$}
+Las funciones $\sharp I$ (que asigna un número natural a cada instrucción) y $\sharp \partes$ (que asigna un número natural a cada programa) son biyectivas.
+
+\subsubsection{Teorema 12.A}
+Existen funciones no computables.
+
+\subsubsection{Función Halt}
+La función $Halt: \naturales^2 \rightarrow \naturales$ es no computable.
+
+\subsubsection{Función $\phi^n$}
+La función $\phi^n$ es parcialmente computable.
+
+\subsection{EXTRA}
+\subsubsection*{Tesis de Church}
+Todos los algoritmos para computar funciones $f: A \subseteq \naturales^k \rightarrow \naturales$ se pueden programar en lenguaje S. 
+\\Es decir, si no se puede programar en lenguaje S $\Rightarrows$ no se puede programar en ningún otro lenguaje.
+
+\subsubsection*{Tesis de Turing}
+Lo que no se puede resolver con una máquina de Turing no se puede resolver con otra máquina.
+
+\subsubsection*{Equivalencia Turing y Church}
+Todo lo que se puede hacer en una máquina de Turing se puede hacer en Lenguaje S, y viceversa.
+
+%---------------------------------------------------------------------------------------------------
+\newpage
+\section{Álgebra de Boole}
+\subsection{Definiciones}
+\subsubsection*{Definición 1. Álgebra de Boole}
+Un \emph{álgebra de Boole} $B$ es un conjunto $B$ en el cual se pueden distinguir dos elementos notados $0$ y $1$, 
+y hay tres elementos $\vee \comma \wedge \comma \neg$, que verifican las siguientes propiedades:
+\begin{enumerate}
+    \item \underline{Conmutatividad}:
+    \begin{align*}
+        x \wedge y &= y \wedge x\\
+        x \vee y &= y \vee x
+    \end{align*}
+    \item \underline{Asociatividad}:
+    \begin{align*}
+        x \wedge (y \wedge z) &= (x \wedge y) \wedge z\\
+        x \vee (y \vee z) &= (x \vee y) \vee z
+    \end{align*}
+    \item \underline{Idempotencia}:
+    \begin{align*}
+        x \wedge x &= x\\
+        x \vee x &= x
+    \end{align*}
+    \item \underline{Absorción}:
+    \begin{align*}
+        x \vee (x \wedge y) &= x\\
+        x \wedge (x \vee y) &= x
+    \end{align*}
+    \item \underline{Distributividad Doble}:
+    \begin{align*}
+        x \vee (y \wedge z) &= (x \vee y) \wedge (x \vee z)\\
+        x \wedge (y \vee z) &= (x \wedge y) \vee (x \wedge z)
+    \end{align*}
+    \item \underline{Elemento Neutro}:
+    \begin{align*}
+        x \wedge 0 &= x\\
+        x \vee 1 &= x
+    \end{align*}
+    \item \underline{Elemento Absorbente}:
+    \begin{align*}
+        x \vee 0 &= 0\\
+        x \wedge 1 &= 1
+    \end{align*}
+    \item \underline{Complementación}:
+    \begin{align*}
+        x \wedge \neg x &= 1\\
+        x \vee \neg x &= 0
+    \end{align*}
+\end{enumerate}
+
+\newpage
+\subsubsection*{Definición 2. Álgebra de Boole de Lindembaum para el cálculo proposicional}
+Sea $F =$ \emph{conjunto de fórmulas de la lógica proposicional}
+\begin{equation*}
+    \alpha \relates \beta \Leftrightarrows \alpha \equiv \beta
+\end{equation*}
+\underline{Observación}: $\relates$ es de equivalencia
+\\Entonces:
+\begin{equation*}
+    B = \left < F/\relates \comma \underline{\wedge} \comma \underline{\wedge} \comma \underline{\neg} \comma 0 = [p_1 \wedge \neg p_1] \comma 1 = [p_1 \vee \neg p_1] \right >
+\end{equation*}
+donde para $[\alpha]$ y $[\beta] \in F/\relates \comma \underline{\wedge} \comma \underline{\wedge} \comma \underline{\neg}$ se definen de la siguiente manera:
+\begin{enumerate}
+    \item $[\alpha] \underline{\wedge} [\beta] = [\alpha \wedge \beta]$
+    \item $[\alpha] \underline{\vee} [\beta] = [\alpha \vee \beta]$
+    \item $\underline{\neg}[\alpha] = [\neg \alpha]$ 
+\end{enumerate}
+es un álgebra de Boole.
+
+\subsection{Propiedad fundamental de un Álgebra de Boole}
+Sea $B = \left< B \comma \wedge \comma \vee \comma \neg \comma 0 \comma 1 \right >$ un álgebra de Boole cualquiera. Entonces:
+\begin{equation*}
+    x \leq y \Leftrightarrows x \wedge y = x \Leftrightarrows x \vee y = y
+\end{equation*}
+\underline{Observaciones}:
+\begin{enumerate}
+    \item La relación $\leq$ es R, A y T $\Rightarrow$ es de orden
+    \item $0 \leq x \leq 1$ $\forall x \in B$
+\end{enumerate}
+
+
+\end{document}
