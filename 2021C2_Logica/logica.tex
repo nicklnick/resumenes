@@ -82,7 +82,7 @@ Card($\naturales$) = $\chi_0$ ("aleph cero")
 \newline Card($I_k$) = $K$ (K = k)
 \newline Card($\varnothing$) = $0$
 \newline Card($[0,1]$) = $c$ ($> \chi_0$) 
-\newline Card($\pares(\naturales)) = c$
+\newline Card($\partes(\naturales)) = c$
 \newline Card($\partes_{finitas}(\naturales)) = \chi_0$
 \newline Card($\partes_{infinitas}(\naturales)) = c$
 \\\\\textbf{Álgebra de Cardinales importantes}
@@ -342,7 +342,7 @@ El alfabeto de la Lógica Proposicional es el que sigue:
 \begin{equation*}
 	A = VAR \cup \{ ( \comma ) \} \cup \{ \wedge \comma \vee \comma \rightarrow \}
 \end{equation*}
-donde $VAR = \{ P_n \tq n \in \naturales \} $
+donde $VAR = \{ p_n \tq n \in \naturales \} $
 
 \subsection{Definiciones Previas}
 \subsubsection*{Definición 1. Fórmula}
@@ -396,20 +396,20 @@ Sea $E \in A^*$. Se define el peso de $E$ como la cantidad de paréntesis que ab
 
 \subsubsection*{Definición 8. Subfórmula}
 Sea $\alpha \in F$.
-\\Si $C(\alpha) = 0 \Rightarrows \alpha = p_j$
+\\Si $C(\alpha) = 0 \Rightarrows \alpha = p_j \in VAR$
 \begin{equation*}
-	S(\alpha) = \{p_j\}
+	S(\alpha) = \{\alpha = p_j\}
 \end{equation*}
 
 \leavevmode\\Si $C(\alpha) > 0$. Entonces:
 \begin{enumerate}
-	\item $\alpha = \neg \beta$
+	\item $\alpha = \neg \beta$ con $\beta \in F$
 		\begin{equation*}
-			S(\alpha) = \{\alpha\} \wedge S(\beta)
+			S(\alpha) = \{\alpha\} \cup S(\beta)
 		\end{equation*}
-	\item $\alpha = (\beta_1 \star \beta_2)$
+	\item $\alpha = (\beta_1 \star \beta_2)$ con $\beta_1 \comma \beta_2 \in F$
 		\begin{equation*}
-			S(\alpha) = \{\alpha\} \wedge S(\beta_1) \wedge S(\beta_2)
+			S(\alpha) = \{\alpha\} \cup S(\beta_1) \cup S(\beta_2)
 		\end{equation*}
 \end{enumerate}
 
@@ -620,9 +620,9 @@ Sea $\Gamma \subseteq F$.
 \\Decimos que \emph{$\Gamma$ es maximal consistente} (mc) si:
 \begin{enumerate}
     \item $\Gamma$ es consistente
-    \item $\forall \phi \in F$ se cumple que:
+    \item Se cumple que:
     \begin{equation*}
-        \phi \in \Gamma \text{ ó } \exists \Psi \in F \tq \Gamma \cup \{\phi\} \vdash \Psi \text{ y } \Gamma \cup \{\phi\} \vdash \neg \Psi \text{ (es inconsistente)}
+        \forall \phi \in F : \phi \in \Gamma \text{ ó } \Gamma \cup \{\phi\} \text{ es inconsistente}
     \end{equation*}
 \end{enumerate}
 
@@ -770,7 +770,7 @@ Dado un alfabeto $A$ y un lenguaje $\lenguaje$ de 1er Orden, una \emph{interpret
     \item $\universo \neq \varnothing$; $\universo$ conjunto que se llama \emph{universo}.
     \item $c \in \ctes \Rightarrows c$ se interpreta como $c_I \in \universo$.
     \item $f^k \in \familia \Rightarrows f^k$ se interpreta como una función cuyo dominio es $\universo^k$ y el codominio es $\universo$.
-    \item $P^k \in \partes \Rightarrows P^k$ se interpreta como una relación k-aria en $\universo$, es decir $P^k_i \in \universo^k$. 
+    \item $P^k \in \partes \Rightarrows P^k$ se interpreta como una relación k-aria en $\universo$, es decir $P^k_\interpretacion \in \universo^k$. 
 \end{enumerate}
 
 \subsubsection*{Definición 2. Valuación}
@@ -1127,8 +1127,8 @@ Sea $h: \naturales^{n+1} \rightarrow \naturales \comma g: \naturales^{n+2} \righ
 Las siguientes funciones se denominan \emph{funciones iniciales}
 \begin{enumerate}
     \item \underline{Cero}. $\naturales \rightarrow \naturales \tq CERO(x) = 0$
-    \item \underline{Sucesión}. $\naturales \rightarrow \naturales \tq SUC(x) = x+1$
-    \item \underline{Proyección}. $\naturales^n \rightarrow \naturales \tq \prod^n_j (x_1 \comma ... \comma x_n) = x_j$ con $1 \leq j \leq n$
+    \item \underline{Sucesor}. $\naturales \rightarrow \naturales \tq SUC(x) = x+1$
+    \item \underline{Proyección}. $\naturales^n \rightarrow \naturales \tq \pi^n_j (x_1 \comma ... \comma x_n) = x_j$ con $1 \leq j \leq n$
 \end{enumerate}
 \underline{Observación}: Las funciones iniciales son computables
 
